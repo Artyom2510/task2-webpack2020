@@ -1,0 +1,34 @@
+-var subMenu1 = ["Услуга1", "Услуга2", "Услуга3"]
+-var subMenu2 = ["Соглашения1", "Соглашения2", "Соглашения3"]
+
+header.header
+	.header__container
+		a(href="/").header__logo
+			img(src="../img/logo.svg", alt="TOXIN")
+		button.header__burger.btn-burger.js-btn-burger
+			span.btn-burger__icon.btn-burger__icon_open
+		.header__wrap.js-menu
+			nav.header__nav
+				ul.header-menu
+					li.header-menu__item
+						a(href="#").header-menu__link.header-menu__link_active О нас
+					li.header-menu__item.header-menu__item_sub
+						a(href="#").header-menu__link Услуги
+						ul.header-menu__submenu.header-submenu
+							each link in subMenu1
+								li.header-submenu__item
+									a(href="#").header-submenu__link= link
+					li.header-menu__item
+						a(href="#").header-menu__link Вакансии
+					li.header-menu__item
+						a(href="#").header-menu__link Новости
+					li.header-menu__item.header-menu__item_sub
+						a(href="#").header-menu__link Соглашения
+						ul.header-menu__submenu.header-submenu
+							each link in subMenu2
+								li.header-submenu__item
+									a(href="#").header-submenu__link= link
+			button.header__sign-in.btn
+				span войти
+			button.header__sign-up.btn.btn_fill
+				span зарегистрироваться
