@@ -1,0 +1,37 @@
+form.form(action="#")
+	h1.form__title Регистрация аккаунта
+	.form__formfiled
+		.formfiled
+			input.formfiled__input#name(type="text", name="name", placeholder="Имя")
+	.form__formfiled
+		.formfiled
+			input.formfiled__input#surname(type="text", name="surname", placeholder="Фамилия")
+	.form__radio-blocks.radio-blocks
+		.radio-blocks__radio.formradio
+			label.formfiled__label(for="#male")
+			input.formfiled__input#male(type="radio", name="radio", placeholder="Мужчина", checked)
+		.radio-blocks__radio.formradio
+			label.formfiled__label(for="#female")
+			input.formfiled__input#female(type="radio", name="radio", placeholder="Женщина")
+	h3.form__subtitle дата рождения
+	.form__formfiled
+		.formfiled
+			input.formfiled__input.js-datepicker#dob(type="text", name="dob", placeholder="ДД.ММ.ГГГГ")
+	h3.form__subtitle данные для входа в сервис
+	.form__formfiled
+		.formfiled
+			input.formfiled__input#email(type="email", name="email", placeholder="Email")
+	.form__formfiled
+		.formfiled
+			input.formfiled__input#password(type="password", name="password", placeholder="Пароль")
+	.form__switch
+		.formfiled
+			label.formfiled__label(for="#switch")
+			input.formfiled__input#switch(type="checkbox", name="switch", placeholder="")
+	.form__submit
+		button.btn.btn_fill.btn_with-arrow(type="submit")
+			span перейти к оплате
+	.form__sign-block.sign-block
+		p.sign-block__desc Уже есть аккаунт на Toxin
+		button.btn(type="button")
+			span войти

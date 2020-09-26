@@ -31,6 +31,9 @@ body {
 	background-color: $gray;
 
 	&_overflow {
+		position: fixed;
+		top: 0;
+		left: 0;
 		overflow: hidden;
 	}
 }
@@ -146,4 +149,11 @@ p {
 			color: $white;
 		}
 	}
+}
+
+.formfield {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
