@@ -134,10 +134,10 @@ module.exports = {
 				test: /\.(png|jpe?g|svg)$/i,
 				use: "file-loader"
 			},
-			{
-				test: /\.svg$/i,
-				use: "svg-inline-loader"
-			},
+			// {
+			// 	test: /\.svg$/i,
+			// 	use: "svg-inline-loader"
+			// },
 			{
 				test: /\.(ttf|eot)$/i,
 				use: "file-loader"
@@ -147,7 +147,7 @@ module.exports = {
 				use: "pug-loader"
 			},
 			{
-				test: /\.m?js$/i,
+				test: /\.js$/i,
 				exclude: /node_modules/,
 				use: jsLoaders()
 			}
