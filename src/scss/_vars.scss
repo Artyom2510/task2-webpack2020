@@ -1,0 +1,28 @@
+// Цвета
+$dark: #1f2041;
+$dark75: rgba($dark, 0.75);
+$dark50: rgba($dark, 0.5);
+$dark25: rgba($dark, 0.25);
+$dark5: rgba($dark, 0.05);
+$purple: #bc9cff;
+$green: #6fcf97;
+$gray: #e5e5e5;
+$white: #fff;
+
+$breakpoints: (
+	xxs: 0,
+	xs: 768px,
+	sm: 1024px,
+	lg: 1280px
+) !default;
+
+$max-widths: (
+	xs: 100%,
+	sm: 920px,
+	lg: 1190px
+) !default;
+
+$grid-gutter-width: 30px !default; // Отступ между колонками ( сумма падингов одной колонки )
+$grid-columns: 12 !default; // Количество колонок
+
+@import "~sass-snippets/scss/snippets";

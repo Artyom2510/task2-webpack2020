@@ -1,4 +1,5 @@
 const { resolve } = require("path");
+const { readdirSync } = require('fs');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -46,11 +47,14 @@ const jsLoaders = () => {
 	return loaders;
 };
 
+const pagesDir = resolve(__dirname, "./src/pug/pages");
+const pages = readdirSync(pagesDir);
+
 module.exports = {
 	context: resolve(__dirname, "src"),
 	mode: "development",
 	entry: {
-		main: ["@babel/polyfill", "./js/index.js"]
+		main: ["@babel/polyfill", "./js/room-ditails.js", "./js/index.js"]
 	},
 	output: {
 		filename: filename("js"),
@@ -66,10 +70,12 @@ module.exports = {
 	},
 	devtool: isDev ? "source-map" : "",
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: "./pug/pages/index.pug",
-			filename: "./index.html"
-		}),
+		...pages.map( page =>
+			new HtmlWebpackPlugin({
+				template: `${pagesDir}/${page}`,
+				filename: page.replace(".pug", ".html")
+			}),
+		),
 		new CleanWebpackPlugin(),
 		new CopyWebpackPlugin({
 			patterns: [
@@ -85,33 +91,6 @@ module.exports = {
 	],
 	module: {
 		rules: [
-			// {
-			// 	test: /\.css$/i,
-			// 	exclude: /node_modules/,
-			// 	use: [
-			// 		{
-			// 			loader: isProd ? MiniCssExtractPlugin.loader : "style-loader"
-			// 		},
-			// 		{
-			// 			loader: "css-loader"
-			// 		},
-			// 		{
-			// 			loader: 'postcss-loader',
-			// 			options: {
-			// 				postcssOptions: {
-			// 					plugins: [
-			// 						[
-			// 							'postcss-preset-env',
-			// 							{
-			// 								// Options
-			// 							},
-			// 						],
-			// 					],
-			// 				},
-			// 			},
-			// 		},
-			// 	]
-			// },
 			{
 				test: /\.scss$/i,
 				exclude: /node_modules/,
@@ -124,9 +103,9 @@ module.exports = {
 					},
 					{
 						loader: "sass-loader",
-						options: {
-							sourceMap: true,
-						},
+						// options: {
+						// 	sourceMap: true,
+						// },
 					}
 				]
 			},
@@ -147,7 +126,7 @@ module.exports = {
 				use: "pug-loader"
 			},
 			{
-				test: /\.m?js$/i,
+				test: /\.js$/i,
 				exclude: /node_modules/,
 				use: jsLoaders()
 			}
