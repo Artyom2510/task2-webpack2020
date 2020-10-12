@@ -9,7 +9,20 @@ $green: #6fcf97;
 $gray: #e5e5e5;
 $white: #fff;
 
-$md: 1279.98px;
-$sm: 1023.98px;
-$xs: 767.98px;
-$xxs: 320px;
+$breakpoints: (
+	xxs: 0,
+	xs: 768px,
+	sm: 1024px,
+	lg: 1280px
+) !default;
+
+$max-widths: (
+	xs: 100%,
+	sm: 920px,
+	lg: 1190px
+) !default;
+
+$grid-gutter-width: 30px !default; // Отступ между колонками ( сумма падингов одной колонки )
+$grid-columns: 12 !default; // Количество колонок
+
+@import "~sass-snippets/scss/snippets";

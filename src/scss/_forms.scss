@@ -5,11 +5,11 @@
 	padding: 40px 30px 30px;
 	background-color: $white;
 
-	@media (max-width: $xs) {
+	@include media(xs) {
 		padding: 30px;
 	}
 
-	@media (max-width: $xxs) {
+	@include media(xxs) {
 		padding-right: 24px;
 		padding-left: 24px;
 	}
@@ -75,10 +75,10 @@
 		&:-webkit-autofill,
 		&:-webkit-autofill:hover,
 		&:-webkit-autofill:focus {
-			font-family: "RobotoMono", sans-serif !important;
-			font-size: 16px !important;
-			line-height: 20px !important;
-			font-weight: 500 !important;
+			font-family: "Montserrat", sans-serif !important;
+			font-size: 14px !important;
+			line-height: 18px !important;
+			font-weight: 400 !important;
 			-webkit-box-shadow: 0 0 0 44px inset $white !important;
 			box-shadow: 0 0 0 44px inset $white !important;
 			caret-color: $dark75 !important;
@@ -100,7 +100,7 @@
 
 	&__radio {
 		position: relative;
-		
+
 		&:first-child {
 			margin-right: 20px;
 		}
@@ -198,14 +198,14 @@
 	align-items: center;
 	justify-content: space-between;
 
-	@media (max-width: $xs) {
+	@include media(xs) {
 		flex-direction: column;
 	}
 
 	&__desc {
 		padding-right: 20px;
 
-		@media (max-width: $xs) {
+		@include media(xs) {
 			margin-bottom: 10px;
 			padding-right: 0;
 		}

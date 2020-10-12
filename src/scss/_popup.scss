@@ -8,7 +8,7 @@
 	opacity: 0;
 	transition: opacity .3s ease;
 
-	@media (max-width: $xs) {
+	@include media(xs) {
 		padding-top: 0;
 	}
 
@@ -41,7 +41,7 @@
 		// max-height: calc(var(--vh, 1vh) * 100);
 		// background-color: $white;
 
-		@media (max-width: $xs) {
+		@include media(xs) {
 			width: 100%;
 			max-height: 100vh;
 		}
@@ -79,7 +79,7 @@
 			transform: translate(-50%, -50%) rotate(-45deg);
 		}
 
-		@media (max-width: $xs) {
+		@include media(xs) {
 			display: block;
 		}
 	}

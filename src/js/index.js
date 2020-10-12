@@ -1,4 +1,6 @@
 'use strict';
+
+import '../scss/libs/bootstrap.scss';
 import '../scss/main.scss';
 
 import $ from 'jquery';
@@ -14,13 +16,13 @@ $(function() {
 
 	// Бургер в хедере
 	burger.on('click', function() {
-		$(this).children().toggleClass('btn-burger__icon_open btn-burger__icon_close');
+		$(this).toggleClass('btn-burger_open');
 		menu.toggleClass('header__wrap_translate');
 		root.toggleClass('root_overflow');
 	});
 
 	// Жикури календарь
-	$.datepicker.regional['ru']= {
+	$.datepicker.regional['ru'] = {
 		closeText: 'применить',
 		prevText: '',
 		nextText: '',

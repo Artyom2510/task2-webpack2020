@@ -1,0 +1,21 @@
+@import "../vars";
+$grid-breakpoints: (
+	"xxs": map-get($breakpoints, "xxs"),
+	"xs": map-get($breakpoints, "xs"),
+	"sm": map-get($breakpoints, "sm"),
+	"lg": map-get($breakpoints, "lg"),
+);
+$container-max-widths: (
+	"xs": map-get($max-widths, "xs"),
+	"sm": map-get($max-widths, "sm"),
+	"lg": map-get($max-widths, "lg"),
+);
+
+// Обязательно
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// // Опционально
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
