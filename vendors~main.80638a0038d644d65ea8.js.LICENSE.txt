@@ -1,4 +1,13 @@
 /*!
+    * jQuery UI Datepicker 1.12.1
+    * http://jqueryui.com
+    *
+    * Copyright jQuery Foundation and other contributors
+    * Released under the MIT license.
+    * http://jquery.org/license
+    */
+
+/*!
  * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
