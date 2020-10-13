@@ -1,6 +1,9 @@
 extends ../main-layout.pug
 
 block main
+
+	- var dropdown = [{id: "adults", label: "взрослые"}, {id: "children", label: "дети"}, {id: "baby", label: "младенцы"}];
+
 	main.main
 		section.main__sliders-wraper.sliders-wraper
 			.main__slider
@@ -21,24 +24,27 @@ block main
 						img(src="img/room-details/image3.jpg", alt="" srcset="img/room-details/image3@2x.jpg 2x, img/room-details/image3@3x.jpg 3x")
 		section.main__room-info.room-info
 			.container
-				.row
-					.col-lg-8
-						.room-info__left
+				.room-info__block
+					.room-info__left
+						.room-info__wrap
 							.info-top
 								span.info-top__title Сведения о номере
 								ul.info-top__list.info-list
 									li.info-list__item.info-item
-										img.info-item__img(src="img/room-details/icons/smile.svg", alt="")
+										.info-item__img-wrap
+											img(src="img/room-details/icons/smile.svg", alt="")
 										.info-item__content
 											span Комфорт
 											p Шумопоглощающие стены
 									li.info-list__item.info-item
-										img.info-item__img(src="img/room-details/icons/city.svg", alt="")
+										.info-item__img-wrap.info-item__img-wrap_w40-h40
+											img(src="img/room-details/icons/city.svg", alt="")
 										.info-item__content
 											span Удобство
 											p Окно в каждой из спален
 									li.info-list__item.info-item
-										img.info-item__img(src="img/room-details/icons/whatshot.svg", alt="")
+										.info-item__img-wrap
+											img(src="img/room-details/icons/whatshot.svg", alt="")
 										.info-item__content
 											span Уют
 											p Номер оснащён камином
@@ -75,3 +81,77 @@ block main
 											li.chart-list__item.chart-list__item_2 Хорошо
 											li.chart-list__item.chart-list__item_1 Удовлетворительно
 											li.chart-list__item.chart-list__item_0 Разочарован
+						.room-info__comments.comments
+							.comments__title
+								span Отзывы посетителей номера
+								span 2 отзыва
+							.comments__cards
+								.comments__card.card
+									.card__top.card-top
+										img.card-top__ava(src="img/room-details/ava.png" alt="")
+										.card-top__wrap
+											p.card-top__name Мурад Сарафанов
+											span.card-top__date 5 дней назад
+									.card__content-wrap
+										button.card__like.like.like_active.js-like
+											svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+												path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+												path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+											span.like__cnt 12
+										.card__content
+											p Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.
+								.comments__card.card
+									.card__top.card-top
+										img.card-top__ava(src="img/room-details/ava.png" alt="")
+										.card-top__wrap
+											p.card-top__name Патрисия Стёклышкова
+											span.card-top__date Неделю назад
+									.card__content-wrap
+										button.card__like.like.js-like
+											svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+												path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+												path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+											span.like__cnt 2
+										.card__content
+											p Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент
+						.room-info__rules.rules
+							.rules__block
+								.rules__title Правила
+								ul.rules__list.rules-list
+									li.rules-list__item Нельзя с питомцами
+									li.rules-list__item Без вечеринок и мероприятий
+									li.rules-list__item Время прибытия — после 13:00, а выезд до 12:00
+							.rules__block
+								.rules__title Отмена
+								.rules__cancel-content
+									p Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.
+					.room-info__right
+						form.room-info__form.form-booking
+							.form-booking__head.form-booking-head
+								.form-booking-head__left
+									span 888
+									span люкс
+								.form-booking-head__right
+									span 9 990
+									span в сутки
+							.form-booking__date
+								.formfield.formfield_half-width
+									label.formfield__label(for="date-start") прибытие
+									input.formfield__input#date-start(type="number")
+								.formfield.formfield_half-width
+									label.formfield__label(for="date-end") выезд
+									input.formfield__input#date-end(type="number")
+							.form-booking__dropdown.formfield.dropdown
+								label.formfield__label(for="date-start") гости
+								.dropdown__total.dropdown-total
+									.dropdown-total__cnt 0
+									.dropdown-total__text гостя
+									button.dropdown__button(type="button")
+								ul.dropdown__list.dropdown-list
+									each item in dropdown
+										li.dropdown-list__item
+											label.dropdown-list__label #{item.label}
+											.dropdown-list__quantity.quantity
+												button(type="button").quantity__minus.quantity-btn.quantity-btn_hidden
+												input.quantity__input(id=item.id type="number" value="0" name="")
+												button(type="button").quantity__plus.quantity-btn

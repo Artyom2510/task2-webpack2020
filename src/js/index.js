@@ -9,6 +9,18 @@ import datepickerFactory from 'jquery-datepicker';
 datepickerFactory($);
 
 $(function() {
+
+	// Настройка вспомогательных переменных
+	function updateDeviceProps() {
+		const main = $('.main');
+		const vh = $(window).innerHeight() * 0.01;
+		$(':root').css('--vh', vh + 'px');
+		const scrollWidth = $(window).width() - main.outerWidth(true);
+		$(':root').css('--scroll-width', scrollWidth + 'px');
+	}
+	$(window).on('resize', updateDeviceProps);
+	updateDeviceProps();
+
 	const burger = $('.js-btn-burger');
 	const root = $('.js-root');
 	const menu = $('.js-menu');
@@ -173,4 +185,17 @@ $(function() {
 	}
 
 	initPopup($('.js-popup'), 'js-tgl-popup');
+
+	// Like
+	let initialLike;
+	$('.js-like').on('click', function() {
+		const child = $(this).children('.like__cnt');
+		initialLike = child.text() || 0;
+		$(this).toggleClass('like_active');
+		if ($(this).hasClass('like_active')) {
+			child.text(++initialLike);
+		} else {
+			child.text(--initialLike);
+		}
+	})
 });
