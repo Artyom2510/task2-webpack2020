@@ -199,6 +199,67 @@ p {
 	}
 }
 
+.btn-purple {
+	display: inline-block;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+	font-weight: 700;
+	border: none;
+	background-color: transparent;
+	color: $purple;
+	text-transform: uppercase;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease;
+
+	&:focus,
+	&:active,
+	&:hover {
+		color: $purple;
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	&_visible {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+.quantity-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+	font-size: 18px;
+	line-height: 1;
+	font-weight: 400;
+	border: 1px solid $dark50;
+	border-radius: 50%;
+	color: $dark50;
+	background-color: $white;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+	&_visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $purple;
+		border-color: $purple;
+	}
+}
+
 .like {
 	$p: &;
 	position: relative;

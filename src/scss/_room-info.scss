@@ -17,6 +17,7 @@
 		position: relative;
 		display: block;
 		width: calc(#{_col(4, lg)} - 16px);
+		max-width: 380px;
 	}
 
 	&__form {

@@ -137,21 +137,59 @@ block main
 							.form-booking__date
 								.formfield.formfield_half-width
 									label.formfield__label(for="date-start") прибытие
-									input.formfield__input#date-start(type="number")
+									.formfield__wrap
+										input.formfield__input.js-mask-date.js-input-datepicker#date-start(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+										button.formfield__icon.js-btn-datepicker(type="button")
 								.formfield.formfield_half-width
 									label.formfield__label(for="date-end") выезд
-									input.formfield__input#date-end(type="number")
-							.form-booking__dropdown.formfield.dropdown
+									.formfield__wrap
+										input.formfield__input.js-mask-date.js-input-datepicker#date-end(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+										button.formfield__icon.js-btn-datepicker(type="button")
+								.js-range-datepicker
+							.form-booking__dropdown.formfield
 								label.formfield__label(for="date-start") гости
-								.dropdown__total.dropdown-total
-									.dropdown-total__cnt 0
-									.dropdown-total__text гостя
-									button.dropdown__button(type="button")
-								ul.dropdown__list.dropdown-list
-									each item in dropdown
-										li.dropdown-list__item
-											label.dropdown-list__label #{item.label}
-											.dropdown-list__quantity.quantity
-												button(type="button").quantity__minus.quantity-btn.quantity-btn_hidden
-												input.quantity__input(id=item.id type="number" value="0" name="")
-												button(type="button").quantity__plus.quantity-btn
+								.formfield__dropdown.formfield__dropdown_open
+									.dropdown.js-dropdown
+										span.dropdown__total.js-guests-total
+										span.dropdown__text.js-guests Сколько гостей
+										button.formfield__icon(type="button")
+									.dropdown__block
+										ul.dropdown__list.dropdown-list
+											each item in dropdown
+												li.dropdown-list__item
+													label.dropdown-list__label #{item.label}
+													.dropdown-list__quantity.quantity
+														button(type="button").quantity__btn.quantity-btn.quantity-btn_minus -
+														input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id)
+														button(type="button").quantity__btn.quantity-btn.quantity-btn_plus.quantity-btn_visible +
+										.dropdown__btns
+											button.btn-purple.js-reset(type="button") очистить
+											button.btn-purple.j-sapply(type="button") применить
+							.form-booking__price-list.price-list
+								ul.price-list__list
+									li.price-list__item.price-list-item
+										.price-list-item__wrap
+											span.price-list-item__text 9 990₽ х
+											span.price-list-item__text 4 суток
+										span.price-list-item__total 39 960₽
+									li.price-list__item.price-list-item
+										.price-list-item__wrap
+											span.price-list-item__text Сбор за услуги:
+											span.price-list-item__info
+										span.price-list-item__total 0₽
+									li.price-list__item.price-list-item
+										.price-list-item__wrap
+											span.price-list-item__text Сбор за дополнительные услуги:
+											span.price-list-item__info
+										span.price-list-item__total 300₽
+									li.price-list__item.price-list-item
+										.price-list-item__wrap
+											span.price-list-item__text Скидка:
+											span.price-list-item__info
+										span.price-list-item__total 2 179₽
+								.price-list__total
+									span Итого
+									span
+									span 38 081₽
+							button.form-booking__submit.btn.btn_fill.btn_with-arrow(type="submit")
+								span забронировать
