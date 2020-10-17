@@ -57,6 +57,26 @@ $(function() {
 	const calendar = $('.js-range-datepicker');
 	const from = $('.js-input-datepicker#date-start');
 	const to = $('.js-input-datepicker#date-end');
+	let countDays = 0;
+	const selectorCountDays = $('.js-cnt-days');
+	const btnDec = $('.js-btn-dec');
+	const btnInc = $('.js-btn-inc');
+	const oneDay = 86400000;
+	const formDataPrice = +$('.form-booking').data('price');
+	$('.js-initial-price').text(formDataPrice);
+	const defultText = 'Сколько гостей';
+	let countPeople = 0;
+	const guestsSelector = $('.js-guests');
+	const cases = [2, 0, 1, 1, 1, 2];
+	const guestsDeclaration = ['гость', 'гостя', 'гостей'];
+	const dropdownReset = $('.js-dropdown-reset');
+	const multipleDaysSelector = $('.js-price-multiples-days');
+	let multipleDays = 0;
+	const servicetPrice1 = +$('.js-service-price1').text();
+	const servicetPrice2 = +$('.js-service-price2').text();
+	const discount = +$('.js-discount').text();
+	const totalPrice = $('.js-total-price');
+	let total = 0;
 
 	calendar.datepicker({
 		showOtherMonths: true,
@@ -77,7 +97,6 @@ $(function() {
 	});
 
 	calendar.datepicker('setDate', [null, null]);
-	calendar.hide();
 
 	calendar.append(`
 		<div class="datepicker-my-btns">
@@ -86,7 +105,7 @@ $(function() {
 		</div>
 	`);
 
-	$(document).on('click', '.js-reset', function() {
+	$(document).on('click', '.js-reset', () => {
 		const extensionRange = calendar.datepicker('widget').data('datepickerExtensionRange');
 		extensionRange.startDateText = null;
 		extensionRange.endDateText = null;
@@ -94,27 +113,115 @@ $(function() {
 		$('.js-apply').removeClass('btn-purple_visible');
 		from.val('');
 		to.val('');
+		countDays = 0;
+		multipleDays = 0;
+		total = 0;
+		selectorCountDays.text('0 суток');
+		multipleDaysSelector.text(0);
+		totalPrice.text(0);
 	});
 
-	$(document).on('click', '.js-apply', function() {
+	$(document).on('click', '.js-apply', () => {
 		const extensionRange = calendar.datepicker('widget').data('datepickerExtensionRange');
-		if (extensionRange.startDateText !== extensionRange.endDateText) {
-			if (extensionRange.startDateText) {
-				from.val(extensionRange.startDateText);
-			}
-			if (extensionRange.endDateText) {
-				to.val(extensionRange.endDateText);
-			}
-		}
+		const start = new Date(extensionRange.startDate).getTime();
+		const end = new Date(extensionRange.endDate).getTime();
+		from.val(extensionRange.startDateText);
+		to.val(extensionRange.endDateText);
+		countDays = (end - start) / oneDay;
+		selectorCountDays.text(`${countDays} суток`);
+		multipleDays = countDays * formDataPrice;
+		multipleDaysSelector.text(multipleDays);
+		total = multipleDays + servicetPrice1 + servicetPrice2 - discount;
+		totalPrice.text(total);
 		calendar.hide();
 	});
 
-	$('.js-btn-datepicker').on('click', function() {
+	const btnDatepicker = $('.js-btn-datepicker');
+	const inputDatepicker = $('.js-input-datepicker');
+	const tglDrop = $('.js-tgl-dropdown');
+	const dropdown = $('.js-dropdown-form');
+	const dropdownOpen = 'formfield__dropdown_open';
+
+	btnDatepicker.on('click', function() {
 		$(this).siblings('.js-input-datepicker').focus();
 	});
 
-	$('.js-input-datepicker').on('focus', () => {
-		$('.js-range-datepicker').show();
+	inputDatepicker.on('focus', () => {
+		calendar.show();
+	});
+
+	$(document).on('click', e => {
+		const target = $(e.target);
+		// Закрытие календаря
+		if (!target.parents('.js-calendar-parent').length && !target.is('.ui-datepicker-prev') &&
+			!target.is('.ui-datepicker-next')
+		) {
+			calendar.hide();
+		}
+		// Закрытие выпадающего списка
+		if (dropdown.hasClass(dropdownOpen)) {
+			if (!target.parents('.js-dropdown-form').length && !target.is(tglDrop)) {
+				dropdown.removeClass(dropdownOpen)
+			}
+		}
+	});
+
+	const declOfNum = (number, titles) => {
+		return (
+			titles[(number % 100 > 4 && number % 100 < 20) ?
+				2 : cases[(number % 10 < 5) ? number % 10 : 5]]
+		);
+	}
+
+	// Открытие / закрытие выпадающего списка
+	tglDrop.on('click', function() {
+		dropdown.toggleClass(dropdownOpen);
+	});
+
+	// Увеличение значения "гостей"
+	btnInc.on('click', function() {
+		const siblingsInput = $(this).siblings('.js-current-total');
+		let value = +siblingsInput.val();
+		$(this).siblings(btnDec).addClass('quantity-btn_visible');
+		const max = +siblingsInput.attr('max');
+		siblingsInput.val(++value);
+		countPeople++;
+		dropdownReset.addClass('btn-purple_visible');
+		if (value === max) {
+			$(this).removeClass('quantity-btn_visible');
+		}
+	});
+
+	// Уменьшение значения "гостей"
+	btnDec.on('click', function() {
+		const siblingsInput = $(this).siblings('.js-current-total');
+		let value = +siblingsInput.val();
+		$(this).siblings(btnInc).addClass('quantity-btn_visible');
+		const min = +siblingsInput.attr('min');
+		siblingsInput.val(--value);
+		countPeople--;
+		if (value === min) {
+			$(this).removeClass('quantity-btn_visible');
+		}
+		if (countPeople === 0) {
+			dropdownReset.removeClass('btn-purple_visible');
+		}
+	});
+
+	$('.js-dropdown-apply').on('click', () => {
+		if (countPeople !== 0) {
+			guestsSelector.text(`${countPeople} ${declOfNum(countPeople, guestsDeclaration)}`);
+		} else {
+			guestsSelector.text(defultText);
+		}
+		dropdown.removeClass(dropdownOpen);
+	});
+
+	dropdownReset.on('click', function() {
+		$('.js-current-total').val(0);
+		countPeople = 0;
+		btnDec.removeClass('quantity-btn_visible');
+		$(this).removeClass('btn-purple_visible')
 	});
 
 	let SwitchPopup = window.SwitchPopup || {};

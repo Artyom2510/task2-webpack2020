@@ -89,4 +89,15 @@ $(function() {
 			startPath < 361 ? startPath = total - 360 : total;
 		}
 	});
+
+	// Тултип
+	$('.price-info').on('click', function() {
+		if (wWidth < 1280) {
+			const tooltip = $(this).children();
+			tooltip.css('opacity', '1');
+			setTimeout(() => {
+				tooltip.css('opacity', '0');
+			}, 1000);
+		}
+	});
 });

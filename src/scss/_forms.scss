@@ -129,10 +129,10 @@ input[type="number"] {
 		&_open {
 			.dropdown {
 				border-color: $dark50;
-			}
 
-			.dropdown-list {
-				display: block;
+				&__block {
+					display: block;
+				}
 			}
 		}
 	}
@@ -310,39 +310,35 @@ input[type="number"] {
 .form-booking-head {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: baseline;
 
 	&__left {
 		display: flex;
-		align-items: flex-end;
+		align-items: baseline;
 
 		span {
+			display: inline-block;
+			font-weight: 700;
+
 			&:first-child {
-				display: inline-block;
 				margin-right: 5px;
 				font-family: "Quicksand", sans-serif;
 				font-size: 24px;
 				line-height: 30px;
-				font-weight: 700;
 
 				&::before {
 					content: "№";
-					display: inline-block;
 					margin-right: 4px;
 					font-family: "Quicksand", sans-serif;
 					font-size: 14px;
 					line-height: 18px;
-					font-weight: 700;
 				}
 			}
 
 			&:last-child {
-				display: inline-block;
-				padding-bottom: 5px;
 				font-family: "Montserrat", sans-serif;
 				font-size: 12px;
 				line-height: 15px;
-				font-weight: 700;
 				color: $purple;
 				text-transform: uppercase;
 			}
@@ -406,10 +402,12 @@ input[type="number"] {
 		line-height: 18px;
 		font-weight: 400;
 		color: $dark75;
+		pointer-events: none;
 	}
 
 	&__block {
 		position: absolute;
+		z-index: 2;
 		top: calc(100% - 1px);
 		left: 0;
 		display: none;
@@ -540,11 +538,120 @@ input[type="number"] {
 	}
 
 	&__text {
+		position: relative;
 		display: inline-block;
 		font-family: "Montserrat", sans-serif;
 		font-size: 14px;
 		line-height: 24px;
 		font-weight: 400;
 		color: $dark75;
+
+		&_price,
+		&_count {
+			&::after,
+			&::before {
+				position: relative;
+				display: inline-block;
+				font-family: "Montserrat", sans-serif;
+				font-size: 14px;
+				line-height: 24px;
+				font-weight: 400;
+				color: $dark75;
+			}
+		}
+
+		&_price {
+			&::after {
+				content: "₽";
+			}
+		}
+
+		&_count {
+			&::before {
+				content: "x";
+				width: 12px;
+				text-align: center;
+			}
+		}
+	}
+
+	&__info {
+		position: relative;
+		margin-left: 5px;
+	}
+}
+
+.price-info {
+	$p: &;
+	display: block;
+	width: 20px;
+	min-width: 20px;
+	height: 20px;
+	font-family: "Montserrat", sans-serif;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: 700;
+	color: $dark25;
+	border-radius: 50%;
+	border: 1px solid $dark25;
+	text-align: center;
+	cursor: help;
+
+	@include media-up(lg) {
+		&:hover {
+			#{$p}__tooltip {
+				opacity: 1;
+			}
+		}
+	}
+
+	&__tooltip {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, -28px);
+		display: inline-block;
+		min-width: 100px;
+		max-width: 200px;
+		padding: 6px;
+		font-family: "Montserrat", sans-serif;
+		font-size: 12px;
+		line-height: 20px;
+		font-weight: 400;
+		color: $dark50;
+		background-color: $white;
+		white-space: nowrap;
+		border-radius: 4px;
+		border: 1px solid $dark25;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.2s ease;
+
+		&::after,
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			display: block;
+			width: 0;
+			height: 0;
+		}
+
+		&::after {
+			z-index: 0;
+			transform: translate(-50%, 8px);
+			border-left: 4px solid transparent;
+			border-right: 4px solid transparent;
+			border-top: 8px solid $dark25;
+		}
+
+		&::before {
+			z-index: 1;
+			transform: translate(-50%, 6px);
+			border-left: 3px solid transparent;
+			border-right: 3px solid transparent;
+			border-top: 6px solid $white;
+		}
 	}
 }
