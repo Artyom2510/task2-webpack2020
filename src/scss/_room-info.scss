@@ -3,14 +3,27 @@
 	padding: 70px 0;
 	background-color: $white;
 
+	@include media(md) {
+		padding: 40px 0;
+	}
+
 	&__block {
 		display: flex;
 		justify-content: space-between;
+
+		@include media(md) {
+			flex-wrap: wrap;
+		}
 	}
 
 	&__left {
 		display: block;
 		width: calc(#{_col(7, lg)} + 16px);
+
+		@include media(md) {
+			width: 100%;
+			order: 2;
+		}
 	}
 
 	&__right {
@@ -18,23 +31,66 @@
 		display: block;
 		width: calc(#{_col(4, lg)} - 16px);
 		max-width: 380px;
+
+		@include media(md) {
+			order: 1;
+			margin-bottom: 30px;
+		}
+
+		@include media(xs) {
+			max-width: 320px;
+			margin: 0 auto 30px;
+		}
+
+		@include media(xxs) {
+			margin-right: -15px;
+			margin-left: -15px;
+		}
 	}
 
 	&__form {
 		position: sticky;
-		left: 0;
 		top: 70px;
+		left: 0;
+
+		@include media(md) {
+			position: relative;
+			top: auto;
+			left: auto;
+		}
 	}
 
 	&__wrap {
 		display: flex;
 		margin-bottom: 30px;
+
+		@include media(md) {
+			flex-wrap: wrap;
+		}
+	}
+
+	&__top {
+		@include media(sm) {
+			margin-bottom: 30px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 }
 
 .info-top {
 	display: block;
 	min-width: calc(#{_col(4, lg)} - 40px);
+
+	@include media(md) {
+		min-width: calc(#{_col(5, md)} - 54px);
+	}
+
+	@include media(xs) {
+		min-width: 100%;
+	}
 
 	&__title {
 		display: block;
@@ -107,9 +163,18 @@
 	display: flex;
 	align-items: flex-end;
 
+	@include media(xxs) {
+		flex-wrap: wrap;
+	}
+
 	&__circle {
 		display: block;
 		margin-right: 30px;
+
+		@include media(xxs) {
+			margin-right: 0;
+			margin-bottom: 16px;
+		}
 
 		circle {
 			fill: $white;
@@ -136,6 +201,10 @@
 }
 
 .chart-list {
+	@include media(xxs) {
+		width: 100%;
+	}
+
 	&__item {
 		position: relative;
 		padding-left: 15px;
@@ -186,11 +255,12 @@
 	&__title {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: baseline;
 		margin-bottom: 20px;
 
 		span {
 			&:first-child {
+				padding-right: 20px;
 				font-family: "OpenSans", sans-serif;
 				font-size: 19px;
 				line-height: 24px;
@@ -202,6 +272,7 @@
 				font-size: 14px;
 				line-height: 1;
 				font-weight: 400;
+				white-space: nowrap;
 			}
 		}
 	}
@@ -290,9 +361,31 @@
 	display: flex;
 	justify-content: space-between;
 
+	@include media(md) {
+		flex-wrap: wrap;
+	}
+
 	&__block {
 		display: block;
 		min-width: calc(#{_col(4, lg)} - 40px);
+
+		@include media(md) {
+			min-width: calc(#{_col(6, md)} - 30px);
+		}
+
+		@include media(sm) {
+			min-width: calc(#{_col(6, sm)} - 30px);
+		}
+
+		@include media(xs) {
+			min-width: 100%;
+			width: 100%;
+			margin-bottom: 30px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	&__title {
@@ -321,6 +414,10 @@
 .rules-list {
 	display: block;
 	max-width: 262px;
+
+	@include media(xs) {
+		width: 100%;
+	}
 
 	&__item {
 		position: relative;

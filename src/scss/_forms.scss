@@ -62,6 +62,10 @@ input[type="number"] {
 
 	&_half-width {
 		width: calc(50% - 10px);
+
+		@include media(xxs) {
+			width: 100%;
+		}
 	}
 
 	&__label {
@@ -290,6 +294,10 @@ input[type="number"] {
 	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
 
+	@include media(xs) {
+		padding: 30px 15px;
+	}
+
 	&__head {
 		margin-bottom: 20px;
 	}
@@ -300,6 +308,10 @@ input[type="number"] {
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
+
+		@include media(xxs) {
+			flex-wrap: wrap;
+		}
 	}
 
 	&__dropdown {
@@ -412,7 +424,7 @@ input[type="number"] {
 		left: 0;
 		display: none;
 		width: 100%;
-		max-height: 25vh;
+		max-height: 30vh;
 		padding: 7px 7px 13px 15px;
 		overflow: auto;
 		background-color: $white;
@@ -522,7 +534,19 @@ input[type="number"] {
 			}
 
 			&:last-child {
+				position: relative;
 				font-family: "Quicksand", sans-serif;
+
+				&::after {
+					content: "₽";
+					position: relative;
+					display: inline-block;
+					font-family: "OpenSans", sans-serif;
+					font-weight: 700;
+					font-size: 19px;
+					line-height: 24px;
+					color: $dark;
+				}
 			}
 		}
 	}

@@ -11,14 +11,17 @@ $white: #fff;
 
 $breakpoints: (
 	xxs: 0,
-	xs: 768px,
-	sm: 1024px,
+	xs: 375,
+	sm: 768px,
+	md: 1024px,
 	lg: 1280px
 ) !default;
 
 $max-widths: (
+	xxs: 100%,
 	xs: 100%,
-	sm: 920px,
+	sm: 738px,
+	md: 976px,
 	lg: 1190px
 ) !default;
 

@@ -15,6 +15,10 @@
 		@include aspect-ratio(980, 485);
 		outline: none !important;
 
+		@include media(xs) {
+			@include aspect-ratio(1);
+		}
+
 		&:not(:first-child) {
 			display: none;
 		}
@@ -35,7 +39,7 @@
 	display: block;
 	width: 100%;
 
-	@include media(xs) {
+	@include media(sm) {
 		.slick-current {
 			img {
 				filter: brightness(100%);
@@ -49,7 +53,7 @@
 		@include aspect-ratio(461, 242.5);
 		outline: none !important;
 
-		@include media(xs) {
+		@include media(sm) {
 			display: block !important;
 			width: 195px !important;
 			margin: 0 auto;
@@ -57,7 +61,7 @@
 		}
 
 		@include media(xs) {
-			width: 140px !important;
+			width: 130px !important;
 		}
 
 		&:first-child {
@@ -74,7 +78,7 @@
 			object-position: 50% 50%;
 			transition: filter 0.3s ease;
 
-			@include media(xs) {
+			@include media(sm) {
 				filter: brightness(40%);
 			}
 		}
