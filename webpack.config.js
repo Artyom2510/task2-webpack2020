@@ -54,7 +54,7 @@ module.exports = {
 	context: resolve(__dirname, "src"),
 	mode: "development",
 	entry: {
-		main: ["@babel/polyfill", "./js/room-ditails.js", "./js/index.js"]
+		main: ["@babel/polyfill", "./js/switchPopup.js", "./js/index.js", "./js/room-ditails.js"]
 	},
 	output: {
 		filename: filename("js"),
