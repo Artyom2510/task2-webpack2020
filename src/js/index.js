@@ -24,20 +24,28 @@ $(function() {
 	updateDeviceProps();
 
 	const menu = $('.js-menu');
+	const burger = $('.js-btn-burger');
 
 	// Меню от 1279
-	menu.switchPopup({
-		pageScrollClass: '.js-root',
-		btnClass: 'js-btn-burger',
-		duration: 300,
-		overflow: true,
-		displayClass: 'header__wrap_display',
-		visibleClass: 'header__wrap_visible'
-	});
+	menu
+		.switchPopup({
+			pageScrollClass: '.js-root',
+			btnClass: 'js-btn-burger',
+			duration: 300,
+			overflow: true,
+			displayClass: 'header__wrap_display',
+			visibleClass: 'header__wrap_visible'
+		})
+		.on('afterClose', function(event, popup) {
+			const burgerIcon = popup.siblings(burger).children();
+			burgerIcon.removeClass('btn-burger__icon_close');
+			burgerIcon.addClass('btn-burger__icon_open');
+		});
 
 	// Бургер в хедере
-	$('.js-btn-burger').on('click', function() {
+	burger.on('click', function() {
 		$(this).toggleClass('btn-burger_open');
+		$(this).children().toggleClass('btn-burger__icon_open btn-burger__icon_close');
 	});
 
 	// Жикури календарь настройки

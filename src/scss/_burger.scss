@@ -1,87 +1,91 @@
 .btn-burger {
 	display: none;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	padding: 0;
 	border: none;
 	background-color: transparent;
 
-	svg {
-		path {
-			transition: fill 0.2s ease;
-		}
-	}
-
-	&_open {
-		svg {
-			path {
-				&:first-child {
-					fill: #FE9EFE;
-				}
-
-				&:nth-child(2) {
-					mix-blend-mode: color-burn;
-					fill: #D83131;
-				}
-
-				&:nth-child(3) {
-					fill: url(#paint0_linear);
-				}
-
-				&:nth-child(4) {
-					mix-blend-mode: lighten;
-					fill: #FE860A;
-				}
-
-				&:nth-child(5) {
-					fill: #BBEC6C;
-				}
-
-				&:nth-child(6) {
-					fill: #A2E62E;
-				}
-
-				&:nth-child(7) {
-					fill: #FEE45A;
-				}
-
-				&:nth-child(8),
-				&:nth-child(9) {
-					fill: #6AD1C4;
-				}
-
-				&:nth-child(10) {
-					mix-blend-mode: lighten;
-					fill: #6AD1C4;
-				}
-
-				&:nth-child(11) {
-					fill: url(#paint1_linear);
-				}
-
-				&:nth-child(12) {
-					mix-blend-mode: lighten;
-					fill: #FE860A;
-
-				}
-				&:nth-child(13),
-				&:nth-child(14),
-				&:nth-child(15) {
-					mix-blend-mode: color-burn;
-					fill: #FE860A;
-				}
-			}
-		}
-	}
-
 	@include media(md) {
 		display: block;
 	}
+
+	&__icon {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 100%;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			z-index: 1;
+			left: 0;
+			display: block;
+			width: 28px;
+			height: 3px;
+			background-color: $dark;
+		}
+
+		&::before {
+			top: 9px;
+			transform-origin: right;
+		}
+
+		&::after {
+			bottom: 9px;
+			transform-origin: left;
+		}
+
+		&_open {
+			&::before {
+				animation: scale .3s cubic-bezier(0.85, 0, 0.3, 1) forwards;
+			}
+
+			&::after {
+				animation: scale .3s cubic-bezier(0.85, 0, 0.3, 1) forwards;
+			}
+		}
+		&_close {
+			&::before {
+				top: 14px;
+				transform-origin: center;
+				animation: scale-1 .3s cubic-bezier(0.85, 0, 0.3, 1) forwards;
+			}
+
+			&::after {
+				top: 14px;
+				transform-origin: center;
+				animation: scale-2 .3s cubic-bezier(0.85, 0, 0.3, 1) forwards;
+			}
+		}
+	}
 }
 
-// @keyframes scale {
-// 	0% {
-// 	}
-// 	100% {
-// 	}
-// }
+@keyframes scale {
+	0% {
+		transform: scaleX(0);
+	}
+	100% {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes scale-1 {
+	0% {
+		transform: rotate(45deg) scaleX(0);
+	}
+	100% {
+		transform: rotate(45deg) scaleX(1);
+	}
+}
+
+@keyframes scale-2 {
+	0% {
+		transform: rotate(-45deg) scaleX(0);
+	}
+	100% {
+		transform: rotate(-45deg) scaleX(1);
+	}
+}
