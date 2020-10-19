@@ -1,29 +1,110 @@
 .room-info {
 	display: block;
-	padding-top: 70px;
+	padding: 70px 0;
 	background-color: $white;
 
-	&__left {
+	@include media(md) {
+		padding: 40px 0;
+	}
+
+	&__block {
 		display: flex;
+		justify-content: space-between;
+
+		@include media(md) {
+			flex-wrap: wrap;
+		}
+	}
+
+	&__left {
+		display: block;
+		width: calc(#{_col(7, lg)} + 16px);
+
+		@include media(md) {
+			width: 100%;
+			order: 2;
+		}
+	}
+
+	&__right {
+		position: relative;
+		display: block;
+		width: calc(#{_col(4, lg)} - 16px);
+		max-width: 380px;
+
+		@include media(md) {
+			order: 1;
+			margin-bottom: 30px;
+		}
+
+		@include media(xs) {
+			max-width: 320px;
+			margin: 0 auto 30px;
+		}
+
+		@include media(xxs) {
+			margin-right: -15px;
+			margin-left: -15px;
+		}
+	}
+
+	&__form {
+		position: sticky;
+		top: 70px;
+		left: 0;
+
+		@include media(md) {
+			position: relative;
+			top: auto;
+			left: auto;
+		}
+	}
+
+	&__wrap {
+		display: flex;
+		margin-bottom: 30px;
+
+		@include media(md) {
+			flex-wrap: wrap;
+		}
+	}
+
+	&__top {
+		@include media(sm) {
+			margin-bottom: 30px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 }
 
 .info-top {
 	display: block;
+	min-width: calc(#{_col(4, lg)} - 40px);
+
+	@include media(md) {
+		min-width: calc(#{_col(5, md)} - 54px);
+	}
+
+	@include media(xs) {
+		min-width: 100%;
+	}
 
 	&__title {
 		display: block;
 		margin-bottom: 20px;
-		font-family: "Quicksand", sans-serif;
+		font-family: "OpenSans", sans-serif;
 		font-size: 19px;
 		line-height: 24px;
 		font-weight: 700;
 		color: $dark;
 	}
 
-	&__list {
-		margin-bottom: 30px;
-	}
+	// &__list {
+	// 	margin-bottom: 30px;
+	// }
 }
 
 .info-list {
@@ -40,12 +121,21 @@
 
 .info-item {
 	display: flex;
+	min-height: 48px;
 
-	&__img {
-		display: block;
+	&__img-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 48px;
 		height: 48px;
 		margin-right: 10px;
+
+		img {
+			display: block;
+			width: auto;
+			height: auto;
+		}
 	}
 
 	&__content {
@@ -73,9 +163,18 @@
 	display: flex;
 	align-items: flex-end;
 
+	@include media(xxs) {
+		flex-wrap: wrap;
+	}
+
 	&__circle {
 		display: block;
 		margin-right: 30px;
+
+		@include media(xxs) {
+			margin-right: 0;
+			margin-bottom: 16px;
+		}
 
 		circle {
 			fill: $white;
@@ -86,7 +185,7 @@
 			fill: $purple;
 
 			&:first-of-type {
-				font-family: "Quicksand", sans-serif;
+				font-family: "OpenSans", sans-serif;
 				font-size: 24px;
 				line-height: 30px;
 			}
@@ -102,6 +201,10 @@
 }
 
 .chart-list {
+	@include media(xxs) {
+		width: 100%;
+	}
+
 	&__item {
 		position: relative;
 		padding-left: 15px;
@@ -144,6 +247,202 @@
 			&::before {
 				background: linear-gradient(180deg, #919191 0%, #3D4975 100%);
 			}
+		}
+	}
+}
+
+.comments {
+	&__title {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 20px;
+
+		span {
+			&:first-child {
+				padding-right: 20px;
+				font-family: "OpenSans", sans-serif;
+				font-size: 19px;
+				line-height: 24px;
+				font-weight: 700;
+			}
+
+			&:last-child {
+				font-family: "Montserrat", sans-serif;
+				font-size: 14px;
+				line-height: 1;
+				font-weight: 400;
+				white-space: nowrap;
+			}
+		}
+	}
+
+	&__cards {
+		display: block;
+		margin-bottom: 30px;
+	}
+
+	&__card {
+		margin-bottom: 20px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.card {
+	display: block;
+
+	&__top {
+		margin-bottom: 12px;
+	}
+
+	&__content-wrap {
+		display: flex;
+	}
+
+	&__like {
+		margin-right: 18px;
+	}
+
+	&__content {
+		p {
+			display: block;
+			margin-bottom: 24px;
+			font-family: "Montserrat", sans-serif;
+			font-size: 14px;
+			line-height: 24px;
+			color: $dark75;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.card-top {
+	display: flex;
+
+	&__ava {
+		display: inline-block;
+		width: 48px;
+		height: 48px;
+		margin-right: 10px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: 50% 50%;
+	}
+
+	&__wrap {
+		display: block;
+	}
+
+	&__name,
+	&__date {
+		display: block;
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+		line-height: 24px;
+		color: $dark75;
+	}
+
+	&__name {
+		font-weight: 700;
+	}
+
+	&__date {
+		font-weight: 400;
+	}
+}
+
+.rules {
+	display: flex;
+	justify-content: space-between;
+
+	@include media(md) {
+		flex-wrap: wrap;
+	}
+
+	&__block {
+		display: block;
+		min-width: calc(#{_col(4, lg)} - 40px);
+
+		@include media(md) {
+			min-width: calc(#{_col(6, md)} - 30px);
+		}
+
+		@include media(sm) {
+			min-width: calc(#{_col(6, sm)} - 30px);
+		}
+
+		@include media(xs) {
+			min-width: 100%;
+			width: 100%;
+			margin-bottom: 30px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&__title {
+		display: block;
+		margin-bottom: 18px;
+		font-family: "OpenSans", sans-serif;
+		font-size: 19px;
+		line-height: 24px;
+		font-weight: 700;
+	}
+
+	&__cancel-content {
+		display: block;
+		max-width: 342px;
+
+		p {
+			display: block;
+			font-family: "Montserrat", sans-serif;
+			font-size: 14px;
+			line-height: 24px;
+			color: $dark75;
+		}
+	}
+}
+
+.rules-list {
+	display: block;
+	max-width: 262px;
+
+	@include media(xs) {
+		width: 100%;
+	}
+
+	&__item {
+		position: relative;
+		display: block;
+		margin-bottom: 10px;
+		padding-left: 20px;
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+		line-height: 24px;
+		color: $dark75;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 6px;
+			left: 0;
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: $dark25;
 		}
 	}
 }

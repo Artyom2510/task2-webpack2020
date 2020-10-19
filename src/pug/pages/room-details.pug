@@ -1,6 +1,9 @@
 extends ../main-layout.pug
 
 block main
+
+	- var dropdown = [{id: "adults", label: "взрослые"}, {id: "children", label: "дети"}, {id: "baby", label: "младенцы"}];
+
 	main.main
 		section.main__sliders-wraper.sliders-wraper
 			.main__slider
@@ -22,56 +25,175 @@ block main
 		section.main__room-info.room-info
 			.container
 				.row
-					.col-lg-8
-						.room-info__left
-							.info-top
-								span.info-top__title Сведения о номере
-								ul.info-top__list.info-list
-									li.info-list__item.info-item
-										img.info-item__img(src="img/room-details/icons/smile.svg", alt="")
-										.info-item__content
-											span Комфорт
-											p Шумопоглощающие стены
-									li.info-list__item.info-item
-										img.info-item__img(src="img/room-details/icons/city.svg", alt="")
-										.info-item__content
-											span Удобство
-											p Окно в каждой из спален
-									li.info-list__item.info-item
-										img.info-item__img(src="img/room-details/icons/whatshot.svg", alt="")
-										.info-item__content
-											span Уют
-											p Номер оснащён камином
-							.info-top
-								span.info-top__title Впечатления от номера
-								.info-top__chart
-									.chart
-										<svg class="chart__circle js-circle-svg" width="126" height="126">
-											<linearGradient id="linearColors1" x1="0" y1="0" x2="1" y2="1">
-												<stop offset="0%" stop-color="#FFE39C"></stop>
-												<stop offset="100%" stop-color="#FFBA9C"></stop>
-											</linearGradient>
-											<linearGradient id="linearColors2" x1="0.5" y1="0" x2="0.5" y2="1">
-												<stop offset="0%" stop-color="#BC9CFF"></stop>
-												<stop offset="100%" stop-color="#8BA4F9"></stop>
-											</linearGradient>
-											<linearGradient id="linearColors3" x1="1" y1="0" x2="0" y2="1">
-												<stop offset="0%" stop-color="#6FCF97"></stop>
-												<stop offset="100%" stop-color="#66D2EA"></stop>
-											</linearGradient>
-											<linearGradient id="linearColors4" x1="1" y1="1" x2="0" y2="0">
-												<stop offset="0%" stop-color="#919191"></stop>
-												<stop offset="100%" stop-color="#3D4975"></stop>
-											</linearGradient>
-											<path d="" fill="none" stroke="url(#linearColors1)" stroke-width="4" data-amount="130" />
-											<path d="" fill="none" stroke="url(#linearColors2)" stroke-width="4" data-amount="65" />
-											<path d="" fill="none" stroke="url(#linearColors3)" stroke-width="4" data-amount="65" />
-											<path d="" fill="none" stroke="url(#linearColors4)" stroke-width="4" data-amount="0" />
-											<text fill="#000" x="63" y="60" text-anchor="middle" class="js-amount">260</text>
-											<text fill="#000" x="63" y="80" text-anchor="middle">голосов</text>
-										</svg>
-										ul.chart__list.chart-list
-											li.chart-list__item.chart-list__item_3 Великолепно
-											li.chart-list__item.chart-list__item_2 Хорошо
-											li.chart-list__item.chart-list__item_1 Удовлетворительно
-											li.chart-list__item.chart-list__item_0 Разочарован
+					.col-12
+						.room-info__block
+							.room-info__left
+								.room-info__wrap
+									.room-info__top.info-top
+										span.info-top__title Сведения о номере
+										ul.info-top__list.info-list
+											li.info-list__item.info-item
+												.info-item__img-wrap
+													img(src="img/room-details/icons/smile.svg", alt="")
+												.info-item__content
+													span Комфорт
+													p Шумопоглощающие стены
+											li.info-list__item.info-item
+												.info-item__img-wrap.info-item__img-wrap_w40-h40
+													img(src="img/room-details/icons/city.svg", alt="")
+												.info-item__content
+													span Удобство
+													p Окно в каждой из спален
+											li.info-list__item.info-item
+												.info-item__img-wrap
+													img(src="img/room-details/icons/whatshot.svg", alt="")
+												.info-item__content
+													span Уют
+													p Номер оснащён камином
+									.room-info__top.info-top
+										span.info-top__title Впечатления от номера
+										.info-top__chart
+											.chart
+												<svg class="chart__circle js-circle-svg" width="126" height="126">
+													<linearGradient id="linearColors1" x1="0" y1="0" x2="1" y2="1">
+														<stop offset="0%" stop-color="#FFE39C"></stop>
+														<stop offset="100%" stop-color="#FFBA9C"></stop>
+													</linearGradient>
+													<linearGradient id="linearColors2" x1="0.5" y1="0" x2="0.5" y2="1">
+														<stop offset="0%" stop-color="#BC9CFF"></stop>
+														<stop offset="100%" stop-color="#8BA4F9"></stop>
+													</linearGradient>
+													<linearGradient id="linearColors3" x1="1" y1="0" x2="0" y2="1">
+														<stop offset="0%" stop-color="#6FCF97"></stop>
+														<stop offset="100%" stop-color="#66D2EA"></stop>
+													</linearGradient>
+													<linearGradient id="linearColors4" x1="1" y1="1" x2="0" y2="0">
+														<stop offset="0%" stop-color="#919191"></stop>
+														<stop offset="100%" stop-color="#3D4975"></stop>
+													</linearGradient>
+													<path d="" fill="none" stroke="url(#linearColors1)" stroke-width="4" data-amount="130" />
+													<path d="" fill="none" stroke="url(#linearColors2)" stroke-width="4" data-amount="65" />
+													<path d="" fill="none" stroke="url(#linearColors3)" stroke-width="4" data-amount="65" />
+													<path d="" fill="none" stroke="url(#linearColors4)" stroke-width="4" data-amount="0" />
+													<text fill="#000" x="63" y="60" text-anchor="middle" class="js-amount">260</text>
+													<text fill="#000" x="63" y="80" text-anchor="middle">голосов</text>
+												</svg>
+												ul.chart__list.chart-list
+													li.chart-list__item.chart-list__item_3 Великолепно
+													li.chart-list__item.chart-list__item_2 Хорошо
+													li.chart-list__item.chart-list__item_1 Удовлетворительно
+													li.chart-list__item.chart-list__item_0 Разочарован
+								.room-info__comments.comments
+									.comments__title
+										span Отзывы посетителей номера
+										span 2 отзыва
+									.comments__cards
+										.comments__card.card
+											.card__top.card-top
+												img.card-top__ava(src="img/room-details/ava.png" alt="")
+												.card-top__wrap
+													p.card-top__name Мурад Сарафанов
+													span.card-top__date 5 дней назад
+											.card__content-wrap
+												button.card__like.like.like_active.js-like
+													svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+														path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+														path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+													span.like__cnt 12
+												.card__content
+													p Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.
+										.comments__card.card
+											.card__top.card-top
+												img.card-top__ava(src="img/room-details/ava.png" alt="")
+												.card-top__wrap
+													p.card-top__name Патрисия Стёклышкова
+													span.card-top__date Неделю назад
+											.card__content-wrap
+												button.card__like.like.js-like
+													svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+														path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+														path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+													span.like__cnt 2
+												.card__content
+													p Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент
+								.room-info__rules.rules
+									.rules__block
+										.rules__title Правила
+										ul.rules__list.rules-list
+											li.rules-list__item Нельзя с питомцами
+											li.rules-list__item Без вечеринок и мероприятий
+											li.rules-list__item Время прибытия — после 13:00, а выезд до 12:00
+									.rules__block
+										.rules__title Отмена
+										.rules__cancel-content
+											p Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.
+							.room-info__right
+								form.room-info__form.form-booking(data-price="9990")
+									.form-booking__head.form-booking-head
+										.form-booking-head__left
+											span 888
+											span люкс
+										.form-booking-head__right
+											span.js-initial-price 0
+											span в сутки
+									.form-booking__date.js-calendar-parent
+										.formfield.formfield_half-width
+											label.formfield__label(for="date-start") прибытие
+											.formfield__wrap
+												input.formfield__input.js-mask-date.js-input-datepicker#date-start(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+												button.formfield__icon.js-btn-datepicker(type="button")
+										.formfield.formfield_half-width
+											label.formfield__label(for="date-end") выезд
+											.formfield__wrap
+												input.formfield__input.js-mask-date.js-input-datepicker#date-end(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+												button.formfield__icon.js-btn-datepicker(type="button")
+										.js-range-datepicker
+									.form-booking__dropdown.formfield
+										label.formfield__label.js-tgl-dropdown гости
+										.formfield__dropdown.js-dropdown-form
+											.dropdown.js-tgl-dropdown
+												span.dropdown__text.js-guests Сколько гостей
+											button.formfield__icon.js-tgl-dropdown(type="button")
+											.dropdown__block
+												ul.dropdown__list.dropdown-list
+													each item in dropdown
+														li.dropdown-list__item
+															label.dropdown-list__label #{item.label}
+															.dropdown-list__quantity.quantity
+																button(type="button").quantity__btn.quantity-btn.js-btn-dec -
+																input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id readonly)
+																button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
+												.dropdown__btns
+													button.btn-purple.js-dropdown-reset(type="button") очистить
+													button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+									.form-booking__price-list.price-list
+										ul.price-list__list
+											li.price-list__item.price-list-item
+												.price-list-item__wrap
+													span.price-list-item__text.price-list-item__text_price.js-initial-price 0
+													span.price-list-item__text.price-list-item__text_count.js-cnt-days 0 суток
+												span.price-list-item__text.price-list-item__text_price.js-price-multiples-days 0
+											li.price-list__item.price-list-item
+												.price-list-item__wrap
+													span.price-list-item__text Сбор за услуги:
+													.price-list-item__info.price-info i
+														p.price-info__tooltip Всё включено
+												span.price-list-item__text.price-list-item__text_price.js-service-price1 0
+											li.price-list__item.price-list-item
+												.price-list-item__wrap
+													span.price-list-item__text Сбор за дополнительные услуги:
+													.price-list-item__info.price-info i
+														p.price-info__tooltip За сервис
+												span.price-list-item__text.price-list-item__text_price.js-service-price2 300
+											li.price-list__item.price-list-item
+												.price-list-item__wrap
+													span.price-list-item__text Скидка:
+													.price-list-item__info.price-info i
+														p.price-info__tooltip По акции
+												span.price-list-item__text.price-list-item__text_price.js-discount 2 179
+										.price-list__total
+											span Итого
+											span
+											span.js-total-price 0
+									button.form-booking__submit.btn.btn_fill.btn_with-arrow(type="submit")
+										span забронировать

@@ -23,7 +23,7 @@ body {
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-	font-family: "Montserrat", sans-serif;
+	font-family: "OpenSans", sans-serif;
 	font-size: 14px;
 	line-height: 1;
 	font-weight: 400;
@@ -35,6 +35,11 @@ body {
 		left: 0;
 		overflow: hidden;
 	}
+}
+
+// Для бутстрапа поправка на скролл
+div[data-forh-element="grid"] {
+	transform: translateX(calc(var(--scroll-width) / 2 * -1));
 }
 
 section {
@@ -74,13 +79,13 @@ h3 {
 }
 
 h1 {
-	font-family: "Quicksand", sans-serif;
+	font-family: "OpenSans", sans-serif;
 	font-size: 24px;
 	line-height: 30px;
 }
 
 h2 {
-	font-family: "Quicksand", sans-serif;
+	font-family: "OpenSans", sans-serif;
 	font-size: 19px;
 	line-height: 24px;
 }
@@ -194,6 +199,148 @@ p {
 	}
 }
 
+.btn-purple {
+	display: inline-block;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+	font-weight: 700;
+	border: none;
+	background-color: transparent;
+	color: $purple;
+	text-transform: uppercase;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease;
+
+	&:focus,
+	&:active,
+	&:hover {
+		color: $purple;
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	&_visible {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+.quantity-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+	font-size: 18px;
+	line-height: 1;
+	font-weight: 400;
+	border: 1px solid $dark50;
+	border-radius: 50%;
+	color: $dark50;
+	background-color: $white;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+	&_visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $purple;
+		border-color: $purple;
+	}
+}
+
+.like {
+	$p: &;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: 40px;
+	height: 20px;
+	padding: 0 6px;
+	background-color: transparent;
+	border-radius: 10px;
+	border: 1px solid rgba(31, 32, 65, 0.25);
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
+		border: 1px solid rgba(31, 32, 65, 0.25);
+	}
+
+	&_active {
+		&::before {
+			background: linear-gradient(#fff, #fff) padding-box,
+									linear-gradient(180deg, #bc9cff, #8BA4F9);
+		}
+
+		#{$p}__img {
+			path {
+				&:first-child {
+					fill: $purple;
+				}
+
+				&:last-child {
+					stroke: $purple;
+				}
+			}
+		}
+
+		#{$p}__cnt {
+			color: $purple;
+		}
+	}
+
+	&__img {
+		position: relative;
+		z-index: 1;
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+
+		path {
+			transition: fill 0.2s ease, stroke 0.2s ease;
+
+			&:first-child {
+				fill: $white;
+			}
+
+			&:last-child {
+				stroke: $dark;
+			}
+		}
+	}
+
+	&__cnt {
+		position: relative;
+		z-index: 1;
+		display: inline-block;
+		font-family: "Montserrat", sans-serif;
+		font-size: 10px;
+		line-height: 12px;
+		font-weight: 400;
+		color: $dark25;
+		transition: color 0.2s ease;
+	}
+}
+
 .main {
 	&__sliders-wraper {
 		position: relative;
@@ -203,7 +350,7 @@ p {
 		display: block;
 		width: 68%;
 
-		@include media(xs) {
+		@include media(sm) {
 			width: 100%;
 		}
 	}
@@ -212,7 +359,7 @@ p {
 		display: block;
 		width: 32%;
 
-		@include media(xs) {
+		@include media(sm) {
 			position: absolute;
 			bottom: 0;
 			left: 0;
@@ -223,6 +370,10 @@ p {
 			margin: 0 auto;
 			padding: 0 24px;
 			background-color: rgba(#000, 0.5);
+		}
+
+		@include media(xs) {
+			padding: 0 16px;
 		}
 	}
 
