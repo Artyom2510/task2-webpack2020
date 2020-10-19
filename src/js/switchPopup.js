@@ -33,7 +33,8 @@ $(function() {
 		thiz.$popup.addClass(thiz.displayClass);
 		setTimeout(function () {
 			thiz.$popup.addClass(thiz.visibleClass);
-		}, 1);
+			$(thiz.$pageScrollClass).attr('data-open', true);
+		}, 0);
 		setTimeout(function () {
 			thiz.state = 'open';
 			thiz.$popup.trigger('afterOpen', [thiz.$popup]);
@@ -44,7 +45,7 @@ $(function() {
 				position: 'fixed',
 				top: 0,
 				paddingRight: thiz.scrollWidth,
-				overflow: 'hidden'
+				overflow: 'hidden',
 			});
 		}
 	};
@@ -55,12 +56,13 @@ $(function() {
 		thiz.$popup.trigger('beforeClose', [thiz.$popup]);
 		thiz.$popup.trigger('beforeChange', [thiz.$popup, 'close']);
 		thiz.$popup.removeClass(thiz.visibleClass);
+		$(thiz.$pageScrollClass).attr('data-open', false);
 		setTimeout(function () {
 			thiz.$popup.removeClass(thiz.displayClass);
 			thiz.state = 'close';
 			thiz.$popup.trigger('afterClose', [thiz.$popup]);
 			thiz.$popup.trigger('afterChange', [thiz.$popup, 'close']);
-			if (thiz.overflow) {
+			if (thiz.overflow && !$(thiz.$pageScrollClass).data('open')) {
 				$(thiz.$pageScrollClass).css({
 					position: 'relative',
 					top: 'auto',

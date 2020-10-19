@@ -17,9 +17,9 @@ form.form(action="#")
 			input.formfield__input.js-datepicker#dob(type="text", name="dob", placeholder="ДД.ММ.ГГГГ", tabindex="3")
 	h3.form__subtitle данные для входа в сервис
 	.form__formfield.formfield
-		input.formfield__input#email(type="email", name="email", placeholder="Email", tabindex="4")
+		input.formfield__input#email-sign-up(type="email", name="email-sign-up", placeholder="Email", tabindex="4")
 	.form__formfield.formfield
-		input.formfield__input#password(type="password", name="password", placeholder="Пароль", tabindex="5")
+		input.formfield__input#password-sign-up(type="password", name="password-sign-up", placeholder="Пароль", tabindex="5")
 	.form__switch.formradio
 		input.formradio__input#switch(type="checkbox", name="switch", placeholder="", tabindex="6")
 		label.formradio__label.formradio__label_switch(for="switch") Получать спецпредложения
@@ -28,5 +28,5 @@ form.form(action="#")
 			span перейти к оплате
 	.form__sign-block.sign-block
 		p.sign-block__desc Уже есть аккаунт на Toxin
-		button.btn(type="button", tabindex="10")
+		button.btn.js-tgl-sign-in(type="button", tabindex="10")
 			span войти

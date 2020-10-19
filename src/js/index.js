@@ -23,15 +23,29 @@ $(function() {
 	$(window).on('resize', updateDeviceProps);
 	updateDeviceProps();
 
-	const burger = $('.js-btn-burger');
-	const root = $('.js-root');
 	const menu = $('.js-menu');
+	const burger = $('.js-btn-burger');
+
+	// Меню от 1279
+	menu
+		.switchPopup({
+			pageScrollClass: '.js-root',
+			btnClass: 'js-btn-burger',
+			duration: 300,
+			overflow: true,
+			displayClass: 'header__wrap_display',
+			visibleClass: 'header__wrap_visible'
+		})
+		.on('afterClose', function(event, popup) {
+			const burgerIcon = popup.siblings(burger).children();
+			burgerIcon.removeClass('btn-burger__icon_close');
+			burgerIcon.addClass('btn-burger__icon_open');
+		});
 
 	// Бургер в хедере
 	burger.on('click', function() {
 		$(this).toggleClass('btn-burger_open');
-		menu.toggleClass('header__wrap_translate');
-		root.toggleClass('root_overflow');
+		$(this).children().toggleClass('btn-burger__icon_open btn-burger__icon_close');
 	});
 
 	// Жикури календарь настройки
@@ -244,14 +258,30 @@ $(function() {
 	// Функция для инициализации попапов
 	function initPopup(popup, btn) {
 		popup.switchPopup({
-			pageScrollClass: '.root',
+			pageScrollClass: '.js-root',
 			btnClass: btn,
 			duration: 300,
 			overflow: true
 		});
 	}
 
-	initPopup($('.js-popup'), 'js-tgl-popup');
+	// Зарегистрироваться
+	const signUp = $('.js-popup-sign-up');
+	const signIn = $('.js-popup-sign-in');
+
+	initPopup(signUp, 'js-tgl-sign-up');
+	initPopup(signIn, 'js-tgl-sign-in');
+
+	const closePopup = (currentPopup, nextPopup) => {
+		nextPopup.on('beforeOpen', function() {
+			currentPopup.switchPopup('close');
+		});
+	}
+
+	closePopup(menu, signUp);
+	closePopup(menu, signIn);
+	closePopup(signUp, signIn);
+	closePopup(signIn, signUp);
 
 	// Like
 	let initialLike;

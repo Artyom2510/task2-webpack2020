@@ -1,0 +1,13 @@
+form.form(action="#")
+	h1.form__title Войти
+	.form__formfield.formfield
+		input.formfield__input#email-sign-in(type="email", name="email-sign-in", placeholder="Email", tabindex="1")
+	.form__formfield.formfield
+		input.formfield__input#password-sign-in(type="password", name="password-sign-in", placeholder="Пароль", tabindex="2")
+	.form__submit
+		button.btn.btn_fill.btn_with-arrow(type="submit", tabindex="3")
+			span войти
+	.form__sign-block.sign-block
+		p.sign-block__desc Нет аккаунта на Toxin?
+		button.btn.js-tgl-sign-up(type="button", tabindex="4")
+			span создать
