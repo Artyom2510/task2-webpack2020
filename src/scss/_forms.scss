@@ -93,6 +93,10 @@ input[type="number"] {
 		background-color: $white;
 		color: $dark75;
 
+		&_with-btn {
+			padding-right: 44px;
+		}
+
 		&::placeholder {
 			font-family: "Montserrat", sans-serif;
 			font-size: 14px;
