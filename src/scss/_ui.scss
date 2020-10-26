@@ -5,14 +5,9 @@ body {
 	padding: 0;
 }
 
-html {
-	height: -webkit-fill-available;
-}
-
 body {
 	position: relative;
 	background-color: $gray;
-	min-height: -webkit-fill-available;
 }
 
 .root {
@@ -20,14 +15,15 @@ body {
 	width: 100vw;
 	min-width: 320px;
 	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-	font-family: "OpenSans", sans-serif;
-	font-size: 14px;
-	line-height: 1;
-	font-weight: 400;
-	background-color: $gray;
+	// font-family: "OpenSans", sans-serif;
+	// font-size: 14px;
+	// line-height: 1;
+	// font-weight: 400;
+	// background-color: $gray;
 
 	&_overflow {
 		position: fixed;
@@ -67,6 +63,7 @@ ol {
 h1,
 h2,
 h3,
+.h3,
 p {
 	display: block;
 	margin: 0;
@@ -74,7 +71,8 @@ p {
 
 h1,
 h2,
-h3 {
+h3,
+.h3 {
 	font-weight: 700;
 }
 
@@ -90,7 +88,7 @@ h2 {
 	line-height: 24px;
 }
 
-h3 {
+h3, .h3 {
 	font-family: "Montserrat", sans-serif;
 	font-size: 12px;
 	line-height: 15px;
@@ -191,7 +189,7 @@ p {
 
 			&:after {
 				transform: translate(20px, -50%);
-				width: 13px;
+				width: 14px;
 				height: 2px;
 				background-color: $white;
 			}
