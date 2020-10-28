@@ -76,8 +76,10 @@ $(function() {
 
 	// Календарь с выбором даты
 	const calendar = $('.js-range-datepicker');
+	const calendarParents = $('.js-calendar-parent');
 	const from = $('.js-input-datepicker#date-start');
 	const to = $('.js-input-datepicker#date-end');
+	const searchDate = $('.js-input-datepicker#search-date');
 	let countDays = 0;
 	const selectorCountDays = $('.js-cnt-days');
 	const btnDec = $('.js-btn-dec');
@@ -85,11 +87,20 @@ $(function() {
 	const oneDay = 86400000;
 	const formDataPrice = +$('.form-booking').data('price');
 	desiredFormat($('.js-initial-price'), formDataPrice);
-	const defultText = 'Сколько гостей';
+	let defultText;
+	let totalExpression = '';
 	let countPeople = 0;
+	let countBaby;
+	let countBedrooms;
+	let countBed;
+	let countSeparateRoom;
 	const guestsSelector = $('.js-guests');
 	const cases = [2, 0, 1, 1, 1, 2];
 	const guestsDeclaration = ['гость', 'гостя', 'гостей'];
+	const guestsBabyDeclaration = ['младенец', 'младенца', 'младенцев'];
+	const bedroomsDeclaration = ['спальня', 'спальни', 'спален'];
+	const bedDeclaration = ['кровать', 'кровати', 'кроватей'];
+	const separateRoomDeclaration = ['ванная комната', 'ванные комнаты', 'ванных комнат'];
 	const dropdownReset = $('.js-dropdown-reset');
 	const multipleDaysSelector = $('.js-price-multiples-days');
 	let multipleDays = 0;
@@ -111,6 +122,10 @@ $(function() {
 			titles[(number % 100 > 4 && number % 100 < 20) ?
 				2 : cases[(number % 10 < 5) ? number % 10 : 5]]
 		);
+	}
+
+	const monthName = (month) => {
+		return month.toLocaleString('default', { month: 'short' }).substr(0, 3);
 	}
 
 	// Дополнительные настройки + видмость кнопок
@@ -135,7 +150,7 @@ $(function() {
 	// Обнуляю при загрузке
 	calendar.datepicker('setDate', [null, null]);
 
-	// Л=Добавляю свою кнопки
+	// Добавляю свою кнопки
 	calendar.append(`
 		<div class="datepicker-my-btns">
 			<button class="btn-purple btn-purple_visible js-reset" type="button">очистить</button>
@@ -144,36 +159,48 @@ $(function() {
 	`);
 
 	// Очистка календаря
-	$(document).on('click', '.js-reset', () => {
+	$(document).on('click', '.js-reset', function() {
 		const extensionRange = calendar.datepicker('widget').data('datepickerExtensionRange');
 		extensionRange.startDateText = null;
 		extensionRange.endDateText = null;
 		calendar.datepicker('setDate', [null, null]);
-		$('.js-apply').removeClass('btn-purple_visible');
-		from.val('');
-		to.val('');
-		countDays = 0;
-		multipleDays = 0;
-		total = 0;
-		selectorCountDays.text('0 суток');
-		multipleDaysSelector.text(0);
-		totalPrice.text(0);
+		$(this).siblings('.js-apply').removeClass('btn-purple_visible');
+		if (calendarParents.hasClass('js-flag-date')) {
+			from.val('');
+			to.val('');
+			countDays = 0;
+			multipleDays = 0;
+			total = 0;
+			selectorCountDays.text('0 суток');
+			multipleDaysSelector.text(0);
+			totalPrice.text(0);
+		} else {
+			searchDate.val('');
+		}
 	});
 
 	// Заполнение дат, подсчёт стоимости
-	$(document).on('click', '.js-apply', () => {
+	$(document).on('click', '.js-apply', function() {
 		const extensionRange = calendar.datepicker('widget').data('datepickerExtensionRange');
-		const start = new Date(extensionRange.startDate).getTime();
-		const end = new Date(extensionRange.endDate).getTime();
-		from.val(extensionRange.startDateText);
-		to.val(extensionRange.endDateText);
-		countDays = (end - start) / oneDay;
-		dayOrDays = countDays > 1 ? 'суток' : 'сутки';
-		selectorCountDays.text(`${countDays.toLocaleString('ru-RU')} ${dayOrDays}`);
-		multipleDays = countDays * formDataPrice;
-		desiredFormat(multipleDaysSelector, multipleDays);
-		total = multipleDays + servicetPrice1 + servicetPrice2 - discount;
-		desiredFormat(totalPrice, total);
+		if (calendarParents.hasClass('js-flag-date')) {
+			const start = new Date(extensionRange.startDate).getTime();
+			const end = new Date(extensionRange.endDate).getTime();
+			from.val(extensionRange.startDateText);
+			to.val(extensionRange.endDateText);
+			countDays = (end - start) / oneDay;
+			dayOrDays = countDays > 1 ? 'суток' : 'сутки';
+			selectorCountDays.text(`${countDays.toLocaleString('ru-RU')} ${dayOrDays}`);
+			multipleDays = countDays * formDataPrice;
+			desiredFormat(multipleDaysSelector, multipleDays);
+			total = multipleDays + servicetPrice1 + servicetPrice2 - discount;
+			desiredFormat(totalPrice, total);
+		} else {
+			const monthStart = monthName(extensionRange.startDate);
+			const monthEnd = monthName(extensionRange.endDate);
+			const dayStart = extensionRange.startDate.getDate();
+			const dayEnd = extensionRange.endDate.getDate();
+			searchDate.val(`${dayStart} ${monthStart} - ${dayEnd} ${monthEnd}`);
+		}
 		calendar.hide();
 	});
 
@@ -204,18 +231,19 @@ $(function() {
 
 	// Открытие / закрытие выпадающего списка
 	tglDrop.on('click', function() {
-		dropdown.toggleClass(dropdownOpen);
+		dropdown.not($(this).parent(dropdown)).removeClass(dropdownOpen);
+		$(this).parent(dropdown).toggleClass(dropdownOpen);
 	});
 
 	// Увеличение значения "гостей"
 	btnInc.on('click', function() {
+		const parent = $(this).parents('.dropdown__block');
 		const siblingsInput = $(this).siblings('.js-current-total');
 		let value = +siblingsInput.val();
 		$(this).siblings(btnDec).addClass('quantity-btn_visible');
 		const max = +siblingsInput.attr('max');
 		siblingsInput.val(++value);
-		countPeople++;
-		dropdownReset.addClass('btn-purple_visible');
+		parent.find(dropdownReset).addClass('btn-purple_visible');
 		if (value === max) {
 			$(this).removeClass('quantity-btn_visible');
 		}
@@ -223,36 +251,96 @@ $(function() {
 
 	// Уменьшение значения "гостей"
 	btnDec.on('click', function() {
+		let currentBlockVal = 0;
+		const parent = $(this).parents('.dropdown__block');
+		const total = parent.find('.js-current-total');
 		const siblingsInput = $(this).siblings('.js-current-total');
 		let value = +siblingsInput.val();
 		$(this).siblings(btnInc).addClass('quantity-btn_visible');
 		const min = +siblingsInput.attr('min');
 		siblingsInput.val(--value);
-		countPeople--;
 		if (value === min) {
 			$(this).removeClass('quantity-btn_visible');
 		}
-		if (countPeople === 0) {
+		total.each(function() {
+			currentBlockVal += +$(this).val();
+		});
+		if (currentBlockVal === 0) {
 			dropdownReset.removeClass('btn-purple_visible');
 		}
 	});
 
 	// Закрытие выпадающего списка по кнопке - Применить
-	$('.js-dropdown-apply').on('click', () => {
-		if (countPeople !== 0) {
-			guestsSelector.text(`${countPeople} ${declOfNum(countPeople, guestsDeclaration)}`);
-		} else {
-			guestsSelector.text(defultText);
+	// Логика далека от идеала, зато работает
+	$('.js-dropdown-apply').on('click', function() {
+		countPeople = 0;
+		countBaby = 0;
+		countBedrooms = 0;
+		countBed = 0;
+		countSeparateRoom = 0;
+		totalExpression = '';
+		const parent = $(this).parents('.dropdown__block');
+		const parentForm = $(this).parents('.js-dropdown-form');
+		const total = parent.find('.js-current-total');
+		total.each(function() {
+			let val = +$(this).val();
+			let id = $(this).attr('id');
+			switch (id) {
+				case 'bedrooms':
+					countBedrooms = val;
+					return;
+				case 'bed':
+					countBed = val;
+					return;
+				case 'separate-room':
+					countSeparateRoom = val;
+					return;
+				case 'baby':
+					countBaby = val;
+					return;
+				default:
+					countPeople += val;
+					return;
+			}
+		});
+		if (countPeople) {
+			totalExpression = `${countPeople} ${declOfNum(countPeople, guestsDeclaration)}`;
+			if (countBaby) {
+				totalExpression += `, ${countBaby} ${declOfNum(countBaby, guestsBabyDeclaration)}`;
+			}
 		}
-		dropdown.removeClass(dropdownOpen);
+		if (countBedrooms) {
+			totalExpression = `${countBedrooms} ${declOfNum(countBedrooms, bedroomsDeclaration)}`;
+		}
+		if (countBed) {
+			if (countBedrooms) totalExpression += ', ';
+			totalExpression += `${countBed} ${declOfNum(countBed, bedDeclaration)}`;
+		}
+		if (countSeparateRoom) {
+			if (countBedrooms || totalExpression) totalExpression += ', ';
+			totalExpression += `${countSeparateRoom} ${declOfNum(countSeparateRoom, separateRoomDeclaration)}`;
+		}
+		if (totalExpression.length) {
+			parentForm.find(guestsSelector).text(totalExpression);
+			parentForm.attr('title', totalExpression);
+		} else {
+			defultText = parentForm.data('default-text');
+			parentForm.find(guestsSelector).text(defultText);
+			parentForm.attr('title', '');
+		}
+		$(this).parents('.js-dropdown-form').removeClass(dropdownOpen);
 	});
 
 	// Сброс значений выпадающего списка
 	dropdownReset.on('click', function() {
-		$('.js-current-total').val(0);
-		countPeople = 0;
-		btnDec.removeClass('quantity-btn_visible');
-		$(this).removeClass('btn-purple_visible')
+		const parent = $(this).parents('.dropdown__block');
+		const parentForm = $(this).parents('.js-dropdown-form');
+		parent.find('.js-current-total').val(0);
+		parent.find(btnDec).removeClass('quantity-btn_visible');
+		parent.find(btnInc).addClass('quantity-btn_visible');
+		$(this).removeClass('btn-purple_visible');
+		defultText = parentForm.data('default-text');
+		parentForm.find(guestsSelector).text(defultText);
 	});
 
 	// Функция для инициализации попапов

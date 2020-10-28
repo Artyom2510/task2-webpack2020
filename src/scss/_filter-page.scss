@@ -1,0 +1,151 @@
+.search-sect {
+	display: block;
+	padding-top: 30px;
+	padding-bottom: 70px;
+
+	&__right {
+		padding-left: 30px;
+	}
+
+	&__title {
+		margin-bottom: 20px;
+	}
+}
+
+.search-filter {
+
+	&__block-date {
+		display: block;
+		margin-bottom: 20px;
+	}
+
+	&__block {
+		display: block;
+		margin-bottom: 30px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__title {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 5px;
+		text-transform: uppercase;
+
+		&_mb16 {
+			margin-bottom: 16px;
+		}
+
+		&_mb20 {
+			margin-bottom: 20px;
+		}
+
+		&_btn {
+			position: relative;
+			width: 100%;
+			height: 44px;
+			align-items: center;
+			padding: 0;
+			border: none;
+			background-color: transparent;
+
+			&::after {
+				content: "";
+				position: absolute;
+				top: 45%;
+				transform: translateY(-50%) rotate(45deg);
+				right: 18px;
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-right: 2px solid $dark50;
+				border-bottom: 2px solid $dark50;
+				transition: border-color 0.2s ease;
+			}
+
+			&:hover {
+				&::after {
+					border-color: $dark75;
+				}
+			}
+		}
+
+		span {
+			color: $dark;
+		}
+	}
+
+	&__price {
+		display: flex;
+
+		span {
+			display: inline-block;
+			color: $dark50;
+
+			&:first-child {
+				&::after {
+					content: "₽ -";
+					position: relative;
+				}
+			}
+
+			&:last-child {
+				margin-left: 2px;
+
+				&::after {
+					content: "₽";
+					position: relative;
+				}
+			}
+
+		}
+	}
+
+	&__range {
+		margin-bottom: 10px;
+	}
+
+	&__desc {
+		p {
+			font-family: "Montserrat", sans-serif;
+			font-size: 12px;
+			line-height: 14px;
+			font-weight: 400;
+			color: $dark50;
+		}
+	}
+}
+
+.list-check {
+	display: block;
+
+	&_hidden {
+		display: none;
+	}
+
+	&__item {
+		position: relative;
+		display: block;
+		margin-bottom: 12px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__info {
+		display: block;
+		margin-bottom: 4px;
+		padding-left: 30px;
+
+		p {
+			font-family: "Montserrat", sans-serif;
+			font-size: 12px;
+			line-height: 24px;
+			font-weight: 400;
+			color: $dark50;
+		}
+	}
+}

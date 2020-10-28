@@ -18,7 +18,6 @@ $(function() {
 			dots: false,
 			arrows: false,
 			slidesToScroll: 1,
-			swipeToSlide: true,
 			fade: true,
 			speed: 300,
 			cssEase: 'ease'
@@ -99,5 +98,65 @@ $(function() {
 				tooltip.css('opacity', '0');
 			}, 1000);
 		}
+	});
+
+	// Слайдер на странице с фильтром
+	const sliders = $('.js-result-slider');
+	const slides = $('.js-result-slide');
+	const dots = $('.js-slider-dots');
+	const prev = $('.js-slider-prev');
+	const next = $('.js-slider-next');
+	let currentDots;
+	let currentItem;
+	let id;
+	let parent;
+	let parentSliders;
+
+	sliders.slick({
+		infinite: true,
+		dots: false,
+		arrows: false,
+		slidesToScroll: 1,
+		fade: true,
+		speed: 300,
+		cssEase: 'ease'
+	});
+
+	// Добавление каждому точек
+	sliders.each(function() {
+		currentDots = $(this).siblings('.js-slider-dots');
+		currentItem = $(this).find(slides);
+		if (currentItem.length > 1) {
+			currentDots.append('<button data-id="0" class="active"></button>');
+			for(var i = 1; i < currentItem.length; i++) {
+				currentDots.append('<button data-id="' + i + '"></button>');
+			}
+		}
+	});
+
+	// Клик по точкам
+	dots.children('button').on('click', function() {
+		id = $(this).data('id');
+		parent = $(this).parents('.result-slider');
+		parentSliders = parent.find(sliders);
+		parentSliders.slick('slickGoTo', id);
+		// parentSliders.slick('slickGoTo', $(this).index());
+	});
+
+	// переключение активной точки
+	sliders.on('afterChange', function(e, slick, currentSlide) {
+		currentDots = $(this).siblings(dots);
+		currentDots.children('button').removeClass('active');
+		currentDots.children('button[data-id="' + currentSlide + '"]').addClass('active');
+	});
+
+	prev.on('click', function() {
+		parent = $(this).parents('.result-slider');
+		parent.find(sliders).slick('slickPrev');
+	});
+
+	next.on('click', function() {
+		parent = $(this).parents('.result-slider');
+		parent.find(sliders).slick('slickNext');
 	});
 });

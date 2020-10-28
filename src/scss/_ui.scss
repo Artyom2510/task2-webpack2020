@@ -19,11 +19,6 @@ body {
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-	// font-family: "OpenSans", sans-serif;
-	// font-size: 14px;
-	// line-height: 1;
-	// font-weight: 400;
-	// background-color: $gray;
 
 	&_overflow {
 		position: fixed;
@@ -340,6 +335,11 @@ p {
 }
 
 .main {
+	display: block;
+	min-height: calc(100vh - 70px - 468px);
+	min-height: calc(var(--vh, 1vh) * 100 - 70px - 468px);
+	background-color: $white;
+
 	&__sliders-wraper {
 		position: relative;
 	}

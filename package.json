@@ -53,6 +53,7 @@
 		"inputmask": "^5.0.5",
 		"jquery": "^3.5.1",
 		"jquery-datepicker": "^1.12.3",
+		"nouislider": "^14.6.2",
 		"sass-snippets": "^2.0.4",
 		"slick-carousel": "^1.8.1"
 	}

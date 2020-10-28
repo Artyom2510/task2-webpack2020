@@ -136,21 +136,20 @@ block main
 										.form-booking-head__right
 											span.js-initial-price 0
 											span в сутки
-									.form-booking__date.js-calendar-parent
+									.form-booking__date.js-calendar-parent.js-flag-date
 										.formfield.formfield_half-width
 											label.formfield__label(for="date-start") прибытие
 											.formfield__wrap
-												input.formfield__input.js-mask-date.js-input-datepicker#date-start(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+												input.formfield__input.js-input-datepicker#date-start(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
 												button.formfield__icon.js-btn-datepicker(type="button")
 										.formfield.formfield_half-width
 											label.formfield__label(for="date-end") выезд
 											.formfield__wrap
-												input.formfield__input.js-mask-date.js-input-datepicker#date-end(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+												input.formfield__input.js-input-datepicker#date-end(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
 												button.formfield__icon.js-btn-datepicker(type="button")
 										.js-range-datepicker
 									.form-booking__dropdown.formfield
-										label.formfield__label.js-tgl-dropdown гости
-										.formfield__dropdown.js-dropdown-form
+										.formfield__dropdown.js-dropdown-form(data-default-text="Сколько гостей")
 											.dropdown.js-tgl-dropdown
 												span.dropdown__text.js-guests Сколько гостей
 											button.formfield__icon.js-tgl-dropdown(type="button")

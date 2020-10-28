@@ -1,0 +1,130 @@
+.result-sliders {
+	display: flex;
+	flex-wrap: wrap;
+
+	&__card {
+		margin-right: 12px;
+		margin-bottom: 20px;
+
+		&:nth-child(3n) {
+			margin-right: 0;
+		}
+
+		&:last-child {
+			margin-right: 0;
+			margin-bottom: 0;
+		}
+	}
+}
+
+.result-card {
+	display: block;
+	width: calc(33.33% - 8px);
+	box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.05);
+	border-radius: 4px;
+	overflow: hidden;
+
+	&:nth-child(3n + 2) {
+		width: calc(33.34% - 8px);
+	}
+
+	&__slider {
+		position: relative;
+	}
+}
+
+.result-slider {
+	display: block;
+
+	&__wrap {
+		position: relative;
+		display: block;
+	}
+
+	&__item {
+		position: relative;
+		display: block;
+		width: 100%;
+		@include aspect-ratio(270, 150);
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: 50% 50%;
+		}
+	}
+
+	&__dots {
+		position: absolute;
+		z-index: 1;
+		right: 15px;
+		bottom: 15px;
+		display: flex;
+
+		button {
+			display: inline-block;
+			width: 8px;
+			height: 8px;
+			margin-right: 4px;
+			padding: 0;
+			border-radius: 50%;
+			border: 1px solid $white;
+			background-color: transparent;
+			transition: background-color 0.2s ease;
+
+			&.active {
+				background-color: $white;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	&__prev,
+	&__next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		display: block;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+		border: none;
+		background-color: transparent;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			display: block;
+			width: 8px;
+			height: 8px;
+			border-bottom: 2px solid $white;
+			border-left: 2px solid $white;
+		}
+	}
+
+	&__prev {
+		left: 0;
+
+		&::before {
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+	}
+
+	&__next {
+		right: 0;
+
+		&::before {
+			transform: translate(-50%, -50%) rotate(-135deg);
+		}
+	}
+}

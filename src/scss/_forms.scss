@@ -70,7 +70,7 @@ input[type="number"] {
 
 	&__label {
 		display: block;
-		margin-bottom: 6px;
+		margin: 0 0 6px;
 		font-family: "Montserrat", sans-serif;
 		font-size: 12px;
 		line-height: 15px;
@@ -84,7 +84,7 @@ input[type="number"] {
 		display: block;
 		width: 100%;
 		padding: 12px 15px;
-		border: 1px solid rgba(31, 32, 65, 0.25);
+		border: 1px solid $dark25;
 		border-radius: 4px;
 		font-family: "Montserrat", sans-serif;
 		font-size: 14px;
@@ -192,6 +192,7 @@ input[type="number"] {
 	&__label {
 		position: relative;
 		display: block;
+		margin: 0;
 		padding-left: 30px;
 		font-family: "Montserrat", sans-serif;
 		font-size: 14px;
@@ -215,7 +216,7 @@ input[type="number"] {
 			width: 20px;
 			height: 20px;
 			background-color: $white;
-			border: 1px solid rgba(31, 32, 65, 0.25);
+			border: 1px solid $dark25;
 			transition: border-color .2s ease;
 		}
 
@@ -266,6 +267,79 @@ input[type="number"] {
 					transform: translate(20px, -50%);
 					background: linear-gradient(180deg, $purple 0%, #8BA4F9 100%);
 				}
+			}
+		}
+	}
+}
+
+.formcheck {
+	$p: &;
+	display: block;
+
+	&__label {
+		position: relative;
+		display: block;
+		margin: 0;
+		padding-left: 30px;
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+		line-height: 18px;
+		font-weight: 400;
+		color: $dark50;
+		cursor: pointer;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			display: block;
+		}
+
+		&::before {
+			top: -1px;
+			left: 0;
+			width: 20px;
+			height: 20px;
+			background-color: $white;
+			border-radius: 4px;
+			border: 1px solid $dark25;
+			transition: border-color .2s ease;
+		}
+
+		&::after {
+			top: 4px;
+			left: 7px;
+			transform: rotate(45deg);
+			width: 6px;
+			height: 8px;
+			border-bottom: 2px solid $purple;
+			border-right: 2px solid $purple;
+			opacity: 0;
+			transition: opacity .2s ease;
+		}
+
+		&_with-info {
+			font-weight: 700;
+			color: $dark75;
+		}
+	}
+
+	&__checkbox {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+
+		&:checked + #{$p}__label {
+			&::before {
+				border-color: $purple;
+			}
+
+			&::after {
+				opacity: 1;
 			}
 		}
 	}
@@ -410,7 +484,6 @@ input[type="number"] {
 		border-color: $dark50;
 	}
 
-	&__total,
 	&__text {
 		display: inline-block;
 		font-family: "Montserrat", sans-serif;
@@ -418,6 +491,9 @@ input[type="number"] {
 		line-height: 18px;
 		font-weight: 400;
 		color: $dark75;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		pointer-events: none;
 	}
 
@@ -465,6 +541,7 @@ input[type="number"] {
 
 	&__label {
 		display: inline-block;
+		margin: 0;
 		font-family: "Montserrat", sans-serif;
 		font-size: 12px;
 		line-height: 15px;
