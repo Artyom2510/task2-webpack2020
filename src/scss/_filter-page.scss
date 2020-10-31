@@ -3,16 +3,45 @@
 	padding-top: 30px;
 	padding-bottom: 70px;
 
+	&__filter {
+		@include media(sm) {
+			margin-bottom: 10px;
+		}
+	}
+
 	&__right {
 		padding-left: 30px;
+
+		@include media(md) {
+			padding-left: 0;
+		}
 	}
 
 	&__title {
 		margin-bottom: 20px;
 	}
+
+	&__sliders  {
+		margin-bottom: 20px;
+	}
+
+	&__tgl-filter {
+		display: none;
+		width: 170px;
+		margin: 0 auto 20px;
+
+		@include media(sm) {
+			display: block;
+		}
+	}
 }
 
 .search-filter {
+	display: block;
+
+	@include media(sm) {
+		display: none;
+	}
 
 	&__block-date {
 		display: block;

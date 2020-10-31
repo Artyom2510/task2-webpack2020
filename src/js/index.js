@@ -389,4 +389,33 @@ $(function() {
 		new Inputmask("8-(978)-999-99-99").mask(input);
 	});
 
+	$('.js-price').each(function() {
+		desiredFormat($(this), +$(this).text());
+	});
+
+	// Показать / скрыть фильтр
+	let isOpen = false;
+	const bntTglFilter = $('.js-tgl-filter');
+	const filter = $('.js-search-filter');
+
+	bntTglFilter.on('click', function() {
+		$(this).children().text(isOpen ? 'Показать фильтр' : 'Скрыть фильтр');
+		$(this).siblings(filter).slideToggle(200);
+		isOpen = !isOpen;
+	});
+
+	// Для планшете при ресайзе
+	$(window).on('resize', function () {
+		if (filter.length) {
+			if ($(this).width() > 1023) {
+				console.log($(this).width())
+				filter.css('display', 'block');
+			} else {
+				isOpen = false;
+				filter.css('display', 'none');
+				bntTglFilter.children().text('Показать фильтр');
+			}
+		}
+	});
+
 });

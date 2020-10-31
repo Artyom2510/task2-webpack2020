@@ -1,5 +1,6 @@
 .footer {
 	display: block;
+	border-top: 1px solid $dark25;
 	background-color: $white;
 
 	@include media(md) {
@@ -147,7 +148,7 @@
 
 .footer-copyright {
 	display: block;
-	border-top: 1px solid $gray;
+	border-top: 1px solid $dark25;
 
 	@include media(md) {
 		border: none;
