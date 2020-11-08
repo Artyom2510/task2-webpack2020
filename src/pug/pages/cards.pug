@@ -1,0 +1,70 @@
+extends ../ui-layout
+
+block main
+
+	-
+		var cards = [
+			{id: "888", type: "люкс", price: "9990", comments: "145", stars: "5"},
+			{id: "840", type: "", price: "9900", comments: "65", stars: "4"}
+		];
+
+	section.all-cards
+		.all-cards__col
+			.all-cards__card
+				form.form
+					h1.form__title Найдём номера под ваши пожелания
+					include ../components/range-calendar
+					.h3.form__subtitle гости
+					.form__dropdown
+						include ../components/dropdown
+					button.form__submit.btn.btn_fill.btn_with-arrow(type="submit")
+						span подобрать номер
+			.all-cards__card
+				include ../components/sign-up
+		.all-cards__col
+			.all-cards__card
+				include ../components/form-booking
+			.all-cards__card
+				include ../components/sign-in
+		.all-cards__col
+			.all-cards__example.js-calendar-parent
+				.calendar-example.js-range-datepicker
+			.search-sect__sliders.result-sliders
+				each card, key in cards
+					.all-cards__card.result-card.result-card_full-width
+						.result-card__slider.result-slider
+							.result-slider__wrap.js-result-slider
+								- for (var item = 0; item < 4; item++)
+									.result-slider__item.js-result-slide
+										img(src="img/room-details/image" + item + ".jpg", alt="" srcset="img/room-details/image3@2x.jpg 2x, img/room-details/image3@3x.jpg 3x")
+							.result-slider__dots.js-slider-dots
+							button.result-slider__prev.js-slider-prev
+							button.result-slider__next.js-slider-next
+						.result-slider__bottom.current-info
+							.current-info__wrap-top
+								.current-info__wrap
+									span.current-info__number № #{card.id}
+									span.current-info__type #{card.type}
+								.current-info__wrap
+									span.current-info__price.js-price #{card.price}
+									span.current-info__period в сутки
+							.current-info__rating
+								.current-info__stars.stars
+									- for (var star = 5; star > 0; star--)
+											if star === +card.stars
+												input.stars__radio(type="radio" id="star" + star + card.id * card.id name="star" + card.id checked)
+											else
+												input.stars__radio(type="radio" id="star" + star + card.id * card.id name="star" + card.id)
+											label.stars__star(for="star" + star + card.id * card.id)
+												<svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M10.2637 15.25L4.07617 19L5.7168 11.9688L0.279297 7.23438L7.45117 6.625L10.2637 0.015625L13.0762 6.625L20.248 7.23438L14.8105 11.9688L16.4512 19L10.2637 15.25Z" fill="url(#paint0_linear)"/>
+													<defs>
+														<linearGradient id="paint0_linear" x1="10.2637" y1="-2" x2="10.2637" y2="22" gradientUnits="userSpaceOnUse">
+															<stop stop-color="#BC9CFF"/>
+															<stop offset="1" stop-color="#8BA4F9"/>
+														</linearGradient>
+													</defs>
+												</svg>
+								.current-info__cnt
+									span #{card.comments}
+									span Отзывов

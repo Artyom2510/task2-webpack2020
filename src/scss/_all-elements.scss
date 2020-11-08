@@ -1,0 +1,98 @@
+.all-elements {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 140px 140px 0;
+	background-color: $white;
+
+	@include media(xs) {
+		padding: 20px 0;
+	}
+
+	&__col {
+		margin-right: 126px;
+		margin-bottom: 100px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		@include media(xs) {
+			margin-right: 0;
+			margin-bottom: 50px;
+		}
+	}
+}
+
+.all-elements-col {
+	display: block;
+	width: 320px;
+
+	&__formfield {
+		position: relative;
+		display: block;
+		width: 320px;
+		margin-bottom: 20px;
+	}
+
+	&__title {
+		display: block;
+		margin-bottom: 16px;
+		color: $dark;
+		text-transform: uppercase;
+	}
+
+	&__block {
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+
+		&_w-266 {
+			width: 266px;
+		}
+	}
+
+	&__formradio {
+		margin-bottom: 10px;
+	}
+
+	&__btns {
+		display: flex;
+		width: 266px;
+		margin-bottom: 30px;
+
+		button {
+			margin-right: 20px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	&__submit {
+		margin-bottom: 40px;
+	}
+
+	&__pagination {
+		width: 240px;
+	}
+}
+
+.dropdown-state {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 140px 140px 50px;
+	background-color: $white;
+
+	&__col {
+		display: block;
+		width: 266px;
+		margin-bottom: 100px;
+	}
+
+	&__col-2 {
+		display: block;
+		width: 320px;
+		margin-bottom: 100px;
+	}
+}

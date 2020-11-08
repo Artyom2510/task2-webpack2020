@@ -1,19 +1,7 @@
-extends ../main-layout.pug
+extends ../main-layout
 
 block main
 
-	-
-		var dropdown = [
-			{id: "adults", label: "взрослые"},
-			{id: "children", label: "дети"},
-			{id: "baby", label: "младенцы"}
-		];
-	-
-		var dropdown2 = [
-			{id: "bedrooms", label: "спальни"},
-			{id: "bed", label: "кровати"},
-			{id: "separate-room", label: "ванные комнаты"}
-		];
 	-
 		var additional = [
 			{id: "breakfast", label: "Завтрак"},
@@ -56,24 +44,8 @@ block main
 										.js-range-datepicker
 							.search-filter__block
 								.search-filter__title
-									span.h3 даты пребывания в отеле
-								.formfield
-									.formfield__dropdown.js-dropdown-form(data-default-text="Сколько гостей")
-										.dropdown.js-tgl-dropdown
-											span.dropdown__text.js-guests Сколько гостей
-										button.formfield__icon.js-tgl-dropdown(type="button")
-										.dropdown__block
-											ul.dropdown__list.dropdown-list
-												each item in dropdown
-													li.dropdown-list__item
-														label.dropdown-list__label #{item.label}
-														.dropdown-list__quantity.quantity
-															button(type="button").quantity__btn.quantity-btn.js-btn-dec -
-															input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id readonly)
-															button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
-											.dropdown__btns
-												button.btn-purple.js-dropdown-reset(type="button") очистить
-												button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+									span.h3 гости
+								include ../components/dropdown
 							.search-filter__block
 								.search-filter__title.search-filter__title_mb20
 									span.h3 диапазон цены
@@ -118,28 +90,12 @@ block main
 							.search-filter__block
 								.search-filter__title
 									span.h3 удобства номера
-								.formfield
-									.formfield__dropdown.js-dropdown-form(data-default-text="Доп. условия")
-										.dropdown.js-tgl-dropdown
-											span.dropdown__text.js-guests Доп. условия
-										button.formfield__icon.js-tgl-dropdown(type="button")
-										.dropdown__block
-											ul.dropdown__list.dropdown-list
-												each item in dropdown2
-													li.dropdown-list__item
-														label.dropdown-list__label #{item.label}
-														.dropdown-list__quantity.quantity
-															button(type="button").quantity__btn.quantity-btn.js-btn-dec -
-															input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id readonly)
-															button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
-											.dropdown__btns
-												button.btn-purple.js-dropdown-reset(type="button") очистить
-												button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+								include ../components/dropdown-conditions
 							.search-filter__block
 								button.search-filter__title.search-filter__title_btn.js-tgl-slidedown
 									span.h3 дополнительные удобства
 								ul.search-filter__list-check.list-check.list-check_hidden.js-body-slidedown
-									each item inadditional
+									each item in additional
 										li.list-check__item
 											.formcheck
 												input.formcheck__checkbox(id=item.id type="checkbox", name=item.id)

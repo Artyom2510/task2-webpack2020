@@ -1,7 +1,26 @@
-extends ../main-layout.pug
+extends ../ui-layout
 
 block main
-	main.main
-		section.main-preview
-			img.main-preview__img(src="img/landing-page/main.jpg", alt="" srcset="main@2x.jpg 2x, main@3x.jpg 3x")
-			p.main-preview__desc Лучшие номера для вашей работы, отдыха и просто вдохновения
+	main.main(style="display: flex; justify-content: center; padding: 100px 20px")
+		ul
+			li
+				a(href="/home.html" target="_blank")
+					h1 Главная
+			li
+				a(href="/filter-page.html" target="_blank")
+					h1 Стариница с фильтром
+			li
+				a(href="/room-details.html" target="_blank")
+					h1 Детальная страница номера
+			li
+				a(href="/colors-type.html" target="_blank")
+					h1 Цвета и заголовки
+			li
+				a(href="/form-elements.html" target="_blank")
+					h1 Элементы формы
+			li
+				a(href="/cards.html" target="_blank")
+					h1 Все карточки
+			li
+				a(href="/headers-footers.html" target="_blank")
+					h1 Хедер и футер

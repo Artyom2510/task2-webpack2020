@@ -1,0 +1,63 @@
+-
+	var dropdown = [
+		{id: "adults", label: "взрослые"},
+		{id: "children", label: "дети"},
+		{id: "baby", label: "младенцы"}
+	];
+form.form-booking.js-calc(data-price="9990")
+	.form-booking__head.form-booking-head
+		.form-booking-head__left
+			span 888
+			span люкс
+		.form-booking-head__right
+			span.js-initial-price 0
+			span в сутки
+	include ../components/range-calendar
+	.form-booking__dropdown.formfield
+		.formfield__dropdown.js-dropdown-form(data-default-text="Сколько гостей")
+			.dropdown.js-tgl-dropdown
+				span.dropdown__text.js-guests Сколько гостей
+			button.formfield__icon.js-tgl-dropdown(type="button")
+			.dropdown__block
+				ul.dropdown__list.dropdown-list
+					each item in dropdown
+						li.dropdown-list__item
+							label.dropdown-list__label #{item.label}
+							.dropdown-list__quantity.quantity
+								button(type="button").quantity__btn.quantity-btn.js-btn-dec -
+								input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id readonly)
+								button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
+				.dropdown__btns
+					button.btn-purple.js-dropdown-reset(type="button") очистить
+					button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+	.form-booking__price-list.price-list
+		ul.price-list__list
+			li.price-list__item.price-list-item
+				.price-list-item__wrap
+					span.price-list-item__text.price-list-item__text_price.js-initial-price 0
+					span.price-list-item__text.price-list-item__text_count.js-cnt-days 0 суток
+				span.price-list-item__text.price-list-item__text_price.js-price-multiples-days 0
+			li.price-list__item.price-list-item
+				.price-list-item__wrap
+					span.price-list-item__text Сбор за услуги:
+					.price-list-item__info.price-info i
+						p.price-info__tooltip Всё включено
+				span.price-list-item__text.price-list-item__text_price.js-service-price1 0
+			li.price-list__item.price-list-item
+				.price-list-item__wrap
+					span.price-list-item__text Сбор за дополнительные услуги:
+					.price-list-item__info.price-info i
+						p.price-info__tooltip За сервис
+				span.price-list-item__text.price-list-item__text_price.js-service-price2 300
+			li.price-list__item.price-list-item
+				.price-list-item__wrap
+					span.price-list-item__text Скидка:
+					.price-list-item__info.price-info i
+						p.price-info__tooltip По акции
+				span.price-list-item__text.price-list-item__text_price.js-discount 2 179
+		.price-list__total
+			span Итого
+			span
+			span.js-total-price 0
+	button.form-booking__submit.btn.btn_fill.btn_with-arrow(type="submit")
+		span забронировать

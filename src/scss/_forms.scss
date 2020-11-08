@@ -5,6 +5,10 @@
 	padding: 40px 29px 30px;
 	background-color: $white;
 
+	*:last-child {
+		margin-bottom: 0;
+	}
+
 	@include media(xs) {
 		padding: 30px;
 	}
@@ -44,6 +48,23 @@
 		display: block;
 		margin-bottom: 30px;
 	}
+
+	&__date {
+		position: relative;
+		z-index: 5;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 20px;
+
+		@include media(xxs) {
+			flex-wrap: wrap;
+		}
+	}
+
+	&__dropdown {
+		display: block;
+		margin-bottom: 30px;
+	}
 }
 
 input[type="number"] {
@@ -56,6 +77,8 @@ input[type="number"] {
 }
 
 .formfield {
+	$p: &;
+	position: relative;
 	display: block;
 	width: 100%;
 	min-height: 44px;
@@ -66,6 +89,26 @@ input[type="number"] {
 		@include media(xxs) {
 			width: 100%;
 		}
+	}
+
+	&_hover {
+		#{$p}__input {
+			border-color: $dark50;
+		}
+	}
+
+	&__no-used {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		display: inline-block;
+		text-transform: uppercase;
+		font-family: "Montserrat", sans-serif;
+		font-size: 12px;
+		line-height: 15px;
+		font-weight: 400;
+		color: $dark50;
 	}
 
 	&__label {
@@ -84,14 +127,15 @@ input[type="number"] {
 		display: block;
 		width: 100%;
 		padding: 12px 15px;
-		border: 1px solid $dark25;
-		border-radius: 4px;
 		font-family: "Montserrat", sans-serif;
 		font-size: 14px;
 		line-height: 18px;
 		font-weight: 400;
 		background-color: $white;
 		color: $dark75;
+		border: 1px solid $dark25;
+		border-radius: 4px;
+		transition: border-color 0.2s ease;
 
 		&_with-btn {
 			padding-right: 44px;
@@ -118,6 +162,11 @@ input[type="number"] {
 			background-color: $white !important;
 			color: $dark75 !important;
 			-webkit-text-fill-color: $dark75;
+		}
+
+		&:focus,
+		&:hover {
+			border-color: $dark50;
 		}
 
 		&:focus {
@@ -171,6 +220,41 @@ input[type="number"] {
 		}
 	}
 
+	&__submit {
+		position: absolute;
+		right: 1px;
+		top: 1px;
+		display: block;
+		width: 42px;
+		height: 42px;
+		padding: 0;
+		border: none;
+		background-color: transparent;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			display: block;
+		}
+
+		&::before {
+			transform: translate(-50%, -50%) rotate(45deg);
+			width: 11px;
+			height: 11px;
+			border-top: 2px solid $purple;
+			border-right: 2px solid $purple;
+		}
+
+		&:after {
+			transform: translate(-50%, -50%);
+			width: 14px;
+			height: 2px;
+			background-color: $purple;
+		}
+	}
 }
 
 .radio-blocks {
@@ -380,18 +464,6 @@ input[type="number"] {
 		margin-bottom: 20px;
 	}
 
-	&__date {
-		position: relative;
-		z-index: 5;
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 20px;
-
-		@include media(xxs) {
-			flex-wrap: wrap;
-		}
-	}
-
 	&__dropdown {
 		margin-bottom: 20px;
 	}
@@ -499,7 +571,7 @@ input[type="number"] {
 
 	&__block {
 		position: absolute;
-		z-index: 2;
+		z-index: 6;
 		top: calc(100% - 1px);
 		left: 0;
 		display: none;
@@ -758,5 +830,20 @@ input[type="number"] {
 			border-right: 3px solid transparent;
 			border-top: 6px solid $white;
 		}
+	}
+}
+
+.form-block {
+	display: block;
+	width: 100%;
+
+	&_w-268 {
+		width: 268px;
+	}
+
+	&__title {
+		margin-bottom: 5px;
+		text-transform: uppercase;
+		color: $dark;
 	}
 }

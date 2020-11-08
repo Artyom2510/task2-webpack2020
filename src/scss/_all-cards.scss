@@ -1,0 +1,44 @@
+.all-cards {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 150px 140px 110px;
+
+	@include media(xs) {
+		padding: 20px 0;
+	}
+
+	&__col {
+		display: block;
+		width: 380px;
+		margin-right: 40px;
+		margin-bottom: 40px;
+
+		&:last-child {
+			margin-right: 0;
+			width: 320px;
+
+			@include media(xs) {
+				margin-bottom: 0;
+			}
+		}
+
+		@include media(xs) {
+			width: 320px;
+			margin-right: 0;
+		}
+	}
+
+	&__card {
+		margin-bottom: 40px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__example {
+		position: relative;
+		display: block;
+		margin-bottom: 40px;
+	}
+}

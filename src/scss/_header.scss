@@ -79,6 +79,30 @@
 			margin-bottom: 12px;
 		}
 	}
+
+	&__login {
+		display: flex;
+	}
+
+	&__user-name {
+		display: inline-block;
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+		line-height: 17px;
+		font-weight: 400;
+		color: $dark50;
+		background-color: transparent;
+		text-decoration: none;
+		border: none;
+		transition: color .2s ease;
+
+		@include media-up(sm) {
+			&:hover {
+				color: $dark75;
+				text-decoration: none;
+			}
+		}
+	}
 }
 
 .header-menu {
