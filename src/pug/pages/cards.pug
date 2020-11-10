@@ -11,14 +11,7 @@ block main
 	section.all-cards
 		.all-cards__col
 			.all-cards__card
-				form.form
-					h1.form__title Найдём номера под ваши пожелания
-					include ../components/range-calendar
-					.formfield
-						label.formfield__label гости
-						include ../components/dropdown
-					button.form__submit.btn.btn_fill.btn_with-arrow(type="submit")
-						span подобрать номер
+				include ../components/form-find
 			.all-cards__card
 				include ../components/sign-up
 		.all-cards__col

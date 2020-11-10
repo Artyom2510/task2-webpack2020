@@ -1,0 +1,8 @@
+form.form
+	h1.form__title Найдём номера под ваши пожелания
+	include ../components/range-calendar
+	.form__formfield.formfield.formfield.js-dropdown-form(data-default-text="Сколько гостей")
+		label.formfield__label гости
+		include ../components/dropdown
+	button.form__submit.btn.btn_fill.btn_with-arrow(type="submit")
+		span подобрать номер
