@@ -82,6 +82,7 @@ input[type="number"] {
 	display: block;
 	width: 100%;
 	min-height: 44px;
+	line-height: 1;
 
 	&_half-width {
 		width: calc(50% - 10px);
@@ -99,7 +100,7 @@ input[type="number"] {
 
 	&__no-used {
 		position: absolute;
-		top: 0;
+		top: 2px;
 		right: 0;
 		z-index: 1;
 		display: inline-block;
@@ -112,7 +113,7 @@ input[type="number"] {
 	}
 
 	&__label {
-		display: block;
+		display: inline-block;
 		margin: 0 0 6px;
 		font-family: "Montserrat", sans-serif;
 		font-size: 12px;

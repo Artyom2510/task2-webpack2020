@@ -1,9 +1,3 @@
--
-	var dropdown = [
-		{id: "adults", label: "взрослые"},
-		{id: "children", label: "дети"},
-		{id: "baby", label: "младенцы"}
-	];
 form.form-booking.js-calc(data-price="9990")
 	.form-booking__head.form-booking-head
 		.form-booking-head__left
@@ -13,23 +7,9 @@ form.form-booking.js-calc(data-price="9990")
 			span.js-initial-price 0
 			span в сутки
 	include ../components/range-calendar
-	.form-booking__dropdown.formfield
-		.formfield__dropdown.js-dropdown-form(data-default-text="Сколько гостей")
-			.dropdown.js-tgl-dropdown
-				span.dropdown__text.js-guests Сколько гостей
-			button.formfield__icon.js-tgl-dropdown(type="button")
-			.dropdown__block
-				ul.dropdown__list.dropdown-list
-					each item in dropdown
-						li.dropdown-list__item
-							label.dropdown-list__label #{item.label}
-							.dropdown-list__quantity.quantity
-								button(type="button").quantity__btn.quantity-btn.js-btn-dec -
-								input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id readonly)
-								button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
-				.dropdown__btns
-					button.btn-purple.js-dropdown-reset(type="button") очистить
-					button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+	.form-booking__dropdown.formfield.js-dropdown-form(data-default-text="Сколько гостей")
+		label.formfield__label.js-tgl-dropdown гости
+		include ../components/dropdown
 	.form-booking__price-list.price-list
 		ul.price-list__list
 			li.price-list__item.price-list-item

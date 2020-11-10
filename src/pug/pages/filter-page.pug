@@ -36,16 +36,16 @@ block main
 						.search-sect__filter.search-filter.js-search-filter
 							.search-filter__block-date
 								.search-filter__title
-									span.h3 даты пребывания в отеле
 								.formfield
+									label.formfield__label даты пребывания в отеле
 									.formfield__wrap.js-calendar-parent
 										input.formfield__input.js-input-datepicker#search-date(name="search-date" type="text" placeholder="ДД.ММ" readonly)
 										button.formfield__icon.js-btn-datepicker(type="button")
 										.js-range-datepicker
 							.search-filter__block
-								.search-filter__title
-									span.h3 гости
-								include ../components/dropdown
+								.formfield.js-dropdown-form(data-default-text="Сколько гостей")
+									label.formfield__label.js-tgl-dropdown гости
+									include ../components/dropdown
 							.search-filter__block
 								.search-filter__title.search-filter__title_mb20
 									span.h3 диапазон цены
@@ -88,9 +88,9 @@ block main
 										.list-check__info
 											p На 1 этаже вас встретит специалист  и проводит до номера.
 							.search-filter__block
-								.search-filter__title
-									span.h3 удобства номера
-								include ../components/dropdown-conditions
+								.formfield.js-dropdown-form(data-default-text="Доп. условия")
+									label.formfield__label.js-tgl-dropdown удобства номера
+									include ../components/dropdown-conditions
 							.search-filter__block
 								button.search-filter__title.search-filter__title_btn.js-tgl-slidedown
 									span.h3 дополнительные удобства

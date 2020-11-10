@@ -113,7 +113,8 @@ $(function() {
 	const btnDatepicker = $('.js-btn-datepicker');
 	const inputDatepicker = $('.js-input-datepicker');
 	const tglDrop = $('.js-tgl-dropdown');
-	const dropdown = $('.js-dropdown-form');
+	const dropdownForm = $('.js-dropdown-form');
+	const dropdown = $('.formfield__dropdown');
 	const dropdownOpen = 'formfield__dropdown_open';
 
 	// Declaration
@@ -261,24 +262,23 @@ $(function() {
 		if (!target.parents('.js-calendar-parent').length && !target.is('.ui-datepicker-prev') &&
 			!target.is('.ui-datepicker-next')) {
 			calendar.hide();
-		}
-		// Закрытие календаря
-		if (!target.parents('.js-calendar-parent').length && !target.is('.ui-datepicker-prev') &&
-			!target.is('.ui-datepicker-next')) {
 			calendarBirthday.hide();
 		}
+
 		// Закрытие выпадающего списка
 		if (dropdown.hasClass(dropdownOpen)) {
-			if (!target.parents('.js-dropdown-form').length && !target.is(tglDrop)) {
-				dropdown.removeClass(dropdownOpen)
+			if (!target.parents('.js-dropdown-form').length) {
+				dropdown.removeClass(dropdownOpen);
 			}
 		}
 	});
 
 	// Открытие / закрытие выпадающего списка
 	tglDrop.on('click', function() {
-		dropdown.not($(this).parent(dropdown)).removeClass(dropdownOpen);
-		$(this).parent(dropdown).toggleClass(dropdownOpen);
+		const parent = $(this).parents('.js-dropdown-form');
+		const thisDrop = parent.find(dropdown);
+		dropdown.not(thisDrop).removeClass(dropdownOpen);
+		thisDrop.toggleClass(dropdownOpen);
 	});
 
 	// Увеличение значения "гостей"
@@ -374,7 +374,7 @@ $(function() {
 			parentForm.find(guestsSelector).text(defultText);
 			parentForm.attr('title', '');
 		}
-		$(this).parents('.js-dropdown-form').removeClass(dropdownOpen);
+		$(this).parents('.formfield__dropdown').removeClass(dropdownOpen);
 	});
 
 	// Сброс значений выпадающего списка
