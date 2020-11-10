@@ -405,6 +405,7 @@ $(function() {
 
 	initPopup(signUp, 'js-tgl-sign-up');
 	initPopup(signIn, 'js-tgl-sign-in');
+	initPopup($('.js-popup-find'), 'js-tgl-find');
 
 	const closePopup = (currentPopup, nextPopup) => {
 		nextPopup.on('beforeOpen', function() {
