@@ -191,6 +191,13 @@ p {
 			}
 		}
 	}
+
+	&:disabled {
+		cursor: not-allowed;
+		&::before {
+			opacity: .5;
+		}
+	}
 }
 
 .btn-purple {
@@ -219,6 +226,11 @@ p {
 	&_visible {
 		opacity: 1;
 		visibility: visible;
+	}
+
+	&:disabled {
+		color: $dark50;
+		cursor: not-allowed;
 	}
 }
 

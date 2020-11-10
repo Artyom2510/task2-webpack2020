@@ -1,0 +1,12 @@
+.form__date.js-calendar-parent.js-flag-date
+	.formfield.formfield_half-width
+		label.formfield__label(for="date-start") прибытие
+		.formfield__wrap
+			input.formfield__input.js-input-datepicker#date-start(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+			button.formfield__icon.js-btn-datepicker(type="button")
+	.formfield.formfield_half-width
+		label.formfield__label(for="date-end") выезд
+		.formfield__wrap
+			input.formfield__input.js-input-datepicker#date-end(type="text" autocomplete="off" placeholder="ДД.ММ.ГГГГ" readonly)
+			button.formfield__icon.js-btn-datepicker(type="button")
+	.js-range-datepicker

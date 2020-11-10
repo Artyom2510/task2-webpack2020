@@ -11,10 +11,10 @@ form.form(action="#")
 		.radio-blocks__radio.formradio
 			input.formradio__input#female(type="radio", name="radio")
 			label.formradio__label(for="female") Женщина
-	h3.form__subtitle дата рождения
-	.form__formfield
-		.formfield
-			input.formfield__input.js-datepicker#dob(type="text", name="dob", placeholder="ДД.ММ.ГГГГ", tabindex="3")
+	.form__formfield.formfield.js-calendar-parent
+		label.formfield__label(for="dob") дата рождения
+		input.formfield__input.js-input-set.js-mask#dob(type="text", name="dob", placeholder="ДД.ММ.ГГГГ", tabindex="3")
+		.js-input-birthday
 	h3.form__subtitle данные для входа в сервис
 	.form__formfield.formfield
 		input.formfield__input#email-sign-up(type="email", name="email-sign-up", placeholder="Email", tabindex="4")

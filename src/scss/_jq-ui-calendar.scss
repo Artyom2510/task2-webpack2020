@@ -1,20 +1,29 @@
-.hasDatepicker {
+.hasDatepicker:not(.calendar-example) {
 	position: absolute;
-	z-index: 2;
 	left: 0;
 	top: calc(100% + 6px);
 	display: none;
+
+	@include media(xs) {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.hasDatepicker,
+.calendar-example {
+	z-index: 6;
 	width: 320px;
 	padding: 20px;
 	border: 1px solid $dark25;
 	border-radius: 4px;
 	background-color: $white;
 	box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.05);
+}
 
-	@include media(xs) {
-		left: 50%;
-		transform: translateX(-50%);
-	}
+.calendar-example {
+	position: relative;
+	display: block !important;
 }
 
 .ui-datepicker .ui-datepicker-prev,
@@ -222,16 +231,16 @@
 		}
 	}
 
-	// .ui-datepicker-current-day {
-	// 	a.ui-state-active {
-	// 		color: $white;
+	.ui-datepicker-current-day {
+		a.ui-state-active {
+			color: $white;
 
-	// 		&::before {
-	// 			background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
-	// 			opacity: 1;
-	// 		}
-	// 	}
-	// }
+			&::before {
+				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				opacity: 1;
+			}
+		}
+	}
 }
 
 .ui-state-hover,

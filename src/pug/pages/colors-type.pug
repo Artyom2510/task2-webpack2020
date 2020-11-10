@@ -1,0 +1,39 @@
+extends ../ui-layout
+
+block main
+
+	-
+		var colors = [
+			{title: "$dark", modifier: "dark", name: "Dark Shade", num: "100%", hex: "#1F2041"},
+			{title: "$dark75", modifier: "dark75", name: "Dark Shade", num: "75%", hex: "#1F2041"},
+			{title: "$dark50", modifier: "dark50", name: "Dark Shade", num: "50%", hex: "#1F2041"},
+			{title: "$dark25", modifier: "dark25", name: "Dark Shade", num: "25%", hex: "#1F2041"},
+			{title: "$dark25", modifier: "dark5", name: "Dark Shade", num: "5%", hex: "#1F2041"},
+			{title: "$purple", modifier: "purple", name: "Purple", hex: "#BC9CFF"},
+			{title: "$green", modifier: "green", name: "Green", hex: "#6FCF97"}
+		];
+
+	section.colors-type
+		.colors-type__colors.colors
+			each color in colors
+				.colors__block.colors-block(title=color.title)
+					.colors-block__rect(class="colors-block__rect_" + color.modifier)
+					.colors-block__wrap
+						.colors-block__name
+							span #{color.name}
+							if color.num
+								span #{color.num}
+						span.colors-block__hex #{color.hex}
+		.colors-type__titles.titles
+			.titles__title
+				span H1
+				h1 This one is the sub-section or <br> widget title
+			.titles__title
+				span H2
+				h2 Next one is the item title inside<br> widgets
+			.titles__title
+				span H3
+				h3 This is a label or CTA text
+			.titles__title
+				span Body
+				p This is the body text which is used for most<br> of the design, like paragraphs, lists, etc.

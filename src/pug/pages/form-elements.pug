@@ -1,0 +1,335 @@
+extends ../ui-layout
+
+block main
+
+	-
+		var dropdown = [
+			{id: "bedrooms", label: "спальни", value: 2, class: "quantity-btn_visible"},
+			{id: "bed", label: "кровати", value: 2, class: "quantity-btn_visible"},
+			{id: "separate-room", label: "ванные комнаты", value: 0, class: ""}
+		];
+
+	-
+		var dropdown0 = [
+			{id: "adults", label: "взрослые"},
+			{id: "children", label: "дети"},
+			{id: "baby", label: "младенцы"}
+		];
+
+	-
+		var dropdown1 = [
+			{id: "adults", label: "взрослые", value: 2, class: "quantity-btn_visible"},
+			{id: "children", label: "дети", value: 1, class: "quantity-btn_visible"},
+			{id: "baby", label: "младенцы", value: 0, class: ""}
+		];
+
+	-
+		var additional = [
+			{id: "breakfast", label: "Завтрак", checked: false},
+			{id: "desk", label: "Письменный стол", checked: true},
+			{id: "feeding-chair", label: "Стул для кормления", checked: true},
+			{id: "cot", label: "Кроватка"}, {id: "tv", label: "Телевизор", checked: false},
+			{id: "shampoo", label: "Шампунь", checked: false},
+		];
+
+	section.all-elements
+		.all-elements__col.all-elements-col
+			.all-elements-col__formfield
+				.formfield
+					span.formfield__no-used Default
+					label.formfield__label(for="mail1") Text Field
+					input.formfield__input#mail1(type="email", name="", placeholder="Email", tabindex="")
+			.all-elements-col__formfield
+				.formfield.formfield_hover
+					span.formfield__no-used Hover / Focus
+					label.formfield__label(for="mail2") Text Field
+					input.formfield__input#mail2(type="email", name="", placeholder="Email", tabindex="", value="This is pretty awesome")
+			.all-elements-col__formfield.form-block
+				.form-block__title
+				.formfield.js-dropdown-form(data-default-text="Сколько гостей")
+					label.formfield__label.js-tgl-dropdown Dropdown
+					include ../components/dropdown
+			.all-elements-col__formfield
+				.formfield.js-calendar-parent
+					label.formfield__label(for="drop1") masked text field
+					input.formfield__input.js-mask.js-input-set#drop1(type="text", name="", placeholder="ДД.ММ.ГГГГ", tabindex="")
+					.js-input-birthday
+			.all-elements-col__formfield
+				include ../components/range-calendar
+			.all-elements-col__formfield
+				.form-block.form-block_w-268
+					.form-block__title.h3 filter date dropdown
+					.formfield
+						.formfield__wrap.js-calendar-parent
+							input.formfield__input.js-input-datepicker#search-date(name="search-date" type="text" placeholder="ДД.ММ" readonly)
+							button.formfield__icon.js-btn-datepicker(type="button")
+							.js-range-datepicker
+			.all-elements-col__formfield
+				.form-block.form-block_w-268
+					.form-block__title
+						span.h3 subscription text field
+					.formfield
+						input.formfield__input.formfield__input_with-btn#subscribe(type="email", name="subscribe", placeholder="Email")
+						button.formfield__submit
+		.all-elements__col.all-elements-col
+			h3.all-elements-col__title Checkbox Buttons
+			.all-elements-col__block.list-check
+				li.list-check__item
+					.formcheck
+						input.formcheck__checkbox#check1(type="checkbox", name="check1")
+						label.formcheck__label(for="check1") Можно курить
+				li.list-check__item
+					.formcheck
+						input.formcheck__checkbox#check2(type="checkbox", name="check2" checked)
+						label.formcheck__label(for="check2") Можно с питомцами
+				li.list-check__item
+					.formcheck
+						input.formcheck__checkbox#check3(type="checkbox", name="check3" checked)
+						label.formcheck__label(for="check3") Можно пригласить гостей (до 10 человек)
+			h3.all-elements-col__title Radio Buttons
+			.all-elements-col__block.radio-blocks
+				.radio-blocks__radio.formradio
+					input.formradio__input#male(type="radio", name="radio", checked)
+					label.formradio__label(for="male") Мужчина
+				.radio-blocks__radio.formradio
+					input.formradio__input#female(type="radio", name="radio")
+					label.formradio__label(for="female") Женщина
+			h3.all-elements-col__title Toggle
+			.all-elements-col__block
+				.all-elements-col__formradio.formradio
+					input.formradio__input#switch1(type="checkbox", name="switch1", placeholder="", tabindex="" checked)
+					label.formradio__label.formradio__label_switch(for="switch1") Получать спецпредложения
+				.formradio
+					input.formradio__input#switch(type="checkbox", name="switch", placeholder="", tabindex="")
+					label.formradio__label.formradio__label_switch(for="switch") Получать спецпредложения
+			h3.all-elements-col__title like button
+			.all-elements-col__block
+				button.card__like.like.like_active.js-like
+					svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+						path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+						path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+					span.like__cnt 2
+				button.card__like.like.js-like
+					svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+						path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+						path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+					span.like__cnt 12
+			h3.all-elements-col__title rate button
+			.all-elements-col__wrap
+				.stars
+					- for (var star = 5; star > 0; star--)
+						if star === 5
+							input.stars__radio(type="radio" id="star" + star name="star1" checked)
+						else
+							input.stars__radio(type="radio" id="star" + star name="star1")
+						label.stars__star(for="star" + star)
+							<svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.2637 15.25L4.07617 19L5.7168 11.9688L0.279297 7.23438L7.45117 6.625L10.2637 0.015625L13.0762 6.625L20.248 7.23438L14.8105 11.9688L16.4512 19L10.2637 15.25Z" fill="url(#paint0_linear)"/>
+								<defs>
+									<linearGradient id="paint0_linear" x1="10.2637" y1="-2" x2="10.2637" y2="22" gradientUnits="userSpaceOnUse">
+										<stop stop-color="#BC9CFF"/>
+										<stop offset="1" stop-color="#8BA4F9"/>
+									</linearGradient>
+								</defs>
+							</svg>
+				.stars
+					- for (var star = 10; star > 5; star--)
+						if star === 9
+							input.stars__radio(type="radio" id="star" + star name="star" checked)
+						else
+							input.stars__radio(type="radio" id="star" + star name="star")
+						label.stars__star(for="star" + star)
+							<svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.2637 15.25L4.07617 19L5.7168 11.9688L0.279297 7.23438L7.45117 6.625L10.2637 0.015625L13.0762 6.625L20.248 7.23438L14.8105 11.9688L16.4512 19L10.2637 15.25Z" fill="url(#paint0_linear)"/>
+								<defs>
+									<linearGradient id="paint0_linear" x1="10.2637" y1="-2" x2="10.2637" y2="22" gradientUnits="userSpaceOnUse">
+										<stop stop-color="#BC9CFF"/>
+										<stop offset="1" stop-color="#8BA4F9"/>
+									</linearGradient>
+								</defs>
+							</svg>
+		.all-elements__col.all-elements-col
+			.all-elements-col__block.all-elements-col__block_w-266
+				.search-filter
+					.search-filter__title.search-filter__title_mb20
+						span.h3 Range Slider
+						span.search-filter__price
+							span.h3.js-min-val
+							span.h3.js-max-val
+					.search-filter__range.js-range
+			h3.all-elements-col__title buttons
+			.all-elements-col__btns
+				button.btn.btn_fill
+					span CLICK ME
+				button.btn.btn_fill(disabled)
+					span CLICK ME
+			.all-elements-col__btns
+				button.btn
+					span CLICK ME
+				button.btn(disabled)
+					span CLICK ME
+			.all-elements-col__btns
+				button.btn-purple.btn-purple_visible CLICK ME
+				button.btn-purple.btn-purple_visible(disabled) CLICK ME
+			.all-elements-col__submit
+				button.btn.btn_fill.btn_with-arrow
+					span перейти к оплате
+			h3.all-elements-col__title pagination
+			.all-elements-col__pagination.pagination
+				.pagination__btns
+					button.pagination__btn.pagination__btn_active
+						span 1
+					button.pagination__btn
+						span 2
+					button.pagination__btn
+						span 3
+					button.pagination__btn
+						span ..
+					button.pagination__btn
+						span 15
+					button.pagination__btn.pagination__btn_next
+						span
+				p.pagination__desc 1 – 12 из 100+ вариантов аренды
+
+	section.dropdown-state
+		.dropdown-state__col
+			.dropdown-state__drop
+				.formfield.js-dropdown-form(data-default-text="Доп. условия")
+					span.formfield__no-used Default
+					label.formfield__label.js-tgl-dropdown Dropdown
+					include ../components/dropdown-conditions
+			.dropdown-state__drop
+				.formfield.js-dropdown-form(data-default-text="Доп. условия")
+					span.formfield__no-used expanded
+					label.formfield__label.js-tgl-dropdown Dropdown
+					.formfield__dropdown.formfield__dropdown_open.js-dropdown-form(data-default-text="Доп. условия")
+						.dropdown.js-tgl-dropdown(style="border-color: rgba(31, 32, 65, 0.5);")
+							span.dropdown__text.js-guests 2 спальни, 2 кровати
+						button.formfield__icon.js-tgl-dropdown(type="button")
+						.dropdown__block(style="display: block !important")
+							ul.dropdown__list.dropdown-list
+								each item in dropdown
+									li.dropdown-list__item
+										label.dropdown-list__label #{item.label}
+										.dropdown-list__quantity.quantity
+											button(type="button").quantity__btn.quantity-btn.js-btn-dec(class=item.class) -
+											input.quantity__input.js-current-total(id=item.id type="number" value=item.value min="0" max="5" name=item.id readonly)
+											button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
+							.dropdown__btns
+								button.btn-purple.js-dropdown-reset(type="button") очистить
+								button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+		.dropdown-state__col-2
+			.formfield.js-dropdown-form(data-default-text="Доп. условия")
+				span.formfield__no-used expanded
+				label.formfield__label.js-tgl-dropdown Dropdown
+				.formfield__dropdown.js-dropdown-form(data-default-text="Сколько гостей")
+					.dropdown.js-tgl-dropdown(style="border-color: rgba(31, 32, 65, 0.5);")
+						span.dropdown__text.js-guests Сколько гостей
+					button.formfield__icon.js-tgl-dropdown(type="button")
+					.dropdown__block(style="display: block !important")
+						ul.dropdown__list.dropdown-list
+							each item in dropdown0
+								li.dropdown-list__item
+									label.dropdown-list__label #{item.label}
+									.dropdown-list__quantity.quantity
+										button(type="button").quantity__btn.quantity-btn.js-btn-dec -
+										input.quantity__input.js-current-total(id=item.id type="number" value="0" min="0" max="5" name=item.id readonly)
+										button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
+						.dropdown__btns
+							button.btn-purple.js-dropdown-reset(type="button") очистить
+							button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+		.dropdown-state__col-2.dropdown-state__col-2_last
+			.formfield.js-dropdown-form(data-default-text="Доп. условия")
+				span.formfield__no-used expanded
+				label.formfield__label.js-tgl-dropdown Dropdown
+				.formfield__dropdown.js-dropdown-form(data-default-text="Сколько гостей")
+					.dropdown.js-tgl-dropdown(style="border-color: rgba(31, 32, 65, 0.5);")
+						span.dropdown__text.js-guests 3 гостя
+					button.formfield__icon.js-tgl-dropdown(type="button")
+					.dropdown__block(style="display: block !important")
+						ul.dropdown__list.dropdown-list
+							each item in dropdown1
+								li.dropdown-list__item
+									label.dropdown-list__label #{item.label}
+									.dropdown-list__quantity.quantity
+										button.quantity__btn.quantity-btn.js-btn-dec(type="button" class=item.class) -
+										input.quantity__input.js-current-total(id=item.id type="number" value=item.value min="0" max="5" name=item.id readonly)
+										button(type="button").quantity__btn.quantity-btn.quantity-btn_visible.js-btn-inc +
+						.dropdown__btns
+							button.btn-purple.js-dropdown-reset(type="button") очистить
+							button.btn-purple.btn-purple_visible.js-dropdown-apply(type="button") применить
+
+	section.lists
+		.lists__col
+			.lists__block
+				button.search-filter__title.search-filter__title_btn.js-tgl-slidedown
+					span.h3 expandable checkbox list
+				ul.search-filter__list-check.list-check.list-check_hidden.js-body-slidedown
+					each item in additional
+						li.list-check__item
+							.formcheck
+								input.formcheck__checkbox(id=item.id type="checkbox", name=item.id checked=item.checked)
+								label.formcheck__label(for=item.id) #{item.label}
+			.lists__block
+				button.search-filter__title.search-filter__title_btn.js-tgl-slidedown
+					span.h3 expandable checkbox list
+				ul.search-filter__list-check.list-check.js-body-slidedown
+					each item in additional
+						li.list-check__item
+							.formcheck
+								input.formcheck__checkbox(id=item.id type="checkbox", name=item.id checked=item.checked)
+								label.formcheck__label(for=item.id) #{item.label}
+		.lists__col-2
+			.lists__block
+				span.h3 rich Checkbox Buttons
+				ul.search-filter__list-check.list-check
+					li.list-check__item
+						.formcheck
+							input.formcheck__checkbox#check4(type="checkbox", name="check4")
+							label.formcheck__label.formcheck__label_with-info(for="check4") Широкий коридор
+						.list-check__info
+							p Ширина коридоров в номере не менее 91 см.
+					li.list-check__item
+						.formcheck
+							input.formcheck__checkbox#check5(type="checkbox", name="check5")
+							label.formcheck__label.formcheck__label_with-info(for="check5") Помощник для инвалидов
+						.list-check__info
+							p На 1 этаже вас встретит специалист  и проводит до номера.
+		.lists__col-3
+			.lists__block
+				span.h3 bullet list
+				ul.bullet-list
+					li.bullet-list__item Нельзя с питомцами
+					li.bullet-list__item Без вечеринок и мероприятий
+					li.bullet-list__item Время прибытия — после 13:00, а выезд до 12:00
+
+	section.last
+		.last__col
+			ul.info-list
+				li.info-list__item.info-item
+					.info-item__img-wrap
+						img(src="img/room-details/icons/smile.svg", alt="")
+					.info-item__content
+						span Комфорт
+						p Шумопоглощающие стены
+				li.info-list__item.info-item
+					.info-item__img-wrap.info-item__img-wrap_w40-h40
+						img(src="img/room-details/icons/city.svg", alt="")
+					.info-item__content
+						span Удобство
+						p Окно в каждой из спален
+		.last__col
+			.card
+				.card__top.card-top
+					img.card-top__ava(src="img/room-details/ava.png" alt="")
+					.card-top__wrap
+						p.card-top__name Мурад Сарафанов
+						span.card-top__date 5 дней назад
+				.card__content-wrap
+					button.card__like.like.like_active.js-like
+						svg.like__img(xmlns="http://www.w3.org/2000/svg" width="72px" height="72px" viewBox="0 0 72 72")
+							path(d="M59.5,25c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598 C33.8861,15.1536,29.7533,12.5,25,12.5c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034 L36,58.5397l20.7339-25.6975l-0.0043-0.0034C58.4597,30.6942,59.5,27.9699,59.5,25z")
+							path(fill="none" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.5,25 c0-6.9036-5.5964-12.5-12.5-12.5c-4.7533,0-8.8861,2.6536-11,6.5598C33.8861,15.1536,29.7533,12.5,25,12.5 c-6.9036,0-12.5,5.5964-12.5,12.5c0,2.9699,1.0403,5.6942,2.7703,7.8387l-0.0043,0.0034L36,58.5397l20.7339-25.6975l-0.0043-0.0034 C58.4597,30.6942,59.5,27.9699,59.5,25z")
+						span.like__cnt 12
+					.card__content
+						p Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.

@@ -18,7 +18,9 @@ $(function() {
 		const vh = $(window).innerHeight() * 0.01;
 		$(':root').css('--vh', vh + 'px');
 		const scrollWidth = $(window).width() - main.outerWidth(true);
-		$(':root').css('--scroll-width', scrollWidth + 'px');
+		if (scrollWidth) {
+			$(':root').css('--scroll-width', scrollWidth + 'px');
+		}
 	}
 	$(window).on('resize', updateDeviceProps);
 	updateDeviceProps();
@@ -76,9 +78,7 @@ $(function() {
 
 	// Календарь с выбором даты
 	const calendar = $('.js-range-datepicker');
-	const calendarParents = $('.js-calendar-parent');
-	const from = $('.js-input-datepicker#date-start');
-	const to = $('.js-input-datepicker#date-end');
+	const calendarBirthday = $('.js-input-birthday');
 	const searchDate = $('.js-input-datepicker#search-date');
 	let countDays = 0;
 	const selectorCountDays = $('.js-cnt-days');
@@ -113,7 +113,8 @@ $(function() {
 	const btnDatepicker = $('.js-btn-datepicker');
 	const inputDatepicker = $('.js-input-datepicker');
 	const tglDrop = $('.js-tgl-dropdown');
-	const dropdown = $('.js-dropdown-form');
+	const dropdownForm = $('.js-dropdown-form');
+	const dropdown = $('.formfield__dropdown');
 	const dropdownOpen = 'formfield__dropdown_open';
 
 	// Declaration
@@ -138,11 +139,39 @@ $(function() {
 		showButtonPanel: false,
 		selectOtherMonths: true,
 		onSelect: function(dateText, inst, extensionRange) {
+			const parent = inst.dpDiv.parents('.js-calendar-parent');
+			const aplly = parent.find('.js-apply');
 			if (extensionRange.startDateText !== extensionRange.endDateText &&
 				extensionRange.startDateText && extensionRange.endDateText) {
-				$('.js-apply').addClass('btn-purple_visible');
+				aplly.addClass('btn-purple_visible');
 			} else {
-				$('.js-apply').removeClass('btn-purple_visible');
+				aplly.removeClass('btn-purple_visible');
+			}
+		}
+	});
+
+	const inputBirthday = $('.js-input-set');
+
+	// День рождения в регистрации
+	calendarBirthday.datepicker({
+		showOtherMonths: true,
+		prevText: '',
+		nextText: '',
+		showButtonPanel: false,
+		selectOtherMonths: true,
+		onSelect: function(dateText) {
+			inputBirthday.val(dateText);
+			calendarBirthday.hide();
+		}
+	});
+
+	inputBirthday.on({
+		'focus': () => {
+			calendarBirthday.show();
+		},
+		'input': function() {
+			if ($(this).val().indexOf('_') === -1) {
+				calendarBirthday.datepicker('setDate', $(this).val());
 			}
 		}
 	});
@@ -160,12 +189,16 @@ $(function() {
 
 	// Очистка календаря
 	$(document).on('click', '.js-reset', function() {
-		const extensionRange = calendar.datepicker('widget').data('datepickerExtensionRange');
+		const parent = $(this).parents('.js-calendar-parent');
+		const thisCalendar = parent.find(calendar);
+		const extensionRange = thisCalendar.datepicker('widget').data('datepickerExtensionRange');
 		extensionRange.startDateText = null;
 		extensionRange.endDateText = null;
-		calendar.datepicker('setDate', [null, null]);
+		thisCalendar.datepicker('setDate', [null, null]);
 		$(this).siblings('.js-apply').removeClass('btn-purple_visible');
-		if (calendarParents.hasClass('js-flag-date')) {
+		if (parent.hasClass('js-flag-date')) {
+			const from = parent.find('.js-input-datepicker#date-start');
+			const to = parent.find('.js-input-datepicker#date-end');
 			from.val('');
 			to.val('');
 			countDays = 0;
@@ -181,19 +214,27 @@ $(function() {
 
 	// Заполнение дат, подсчёт стоимости
 	$(document).on('click', '.js-apply', function() {
-		const extensionRange = calendar.datepicker('widget').data('datepickerExtensionRange');
-		if (calendarParents.hasClass('js-flag-date')) {
+		const parent = $(this).parents('.js-calendar-parent');
+		const thisCalendar = parent.find(calendar);
+		console.log(parent)
+		const extensionRange = thisCalendar.datepicker('widget').data('datepickerExtensionRange');
+		if (parent.hasClass('js-flag-date')) {
 			const start = new Date(extensionRange.startDate).getTime();
 			const end = new Date(extensionRange.endDate).getTime();
+			const from = parent.find('.js-input-datepicker#date-start');
+			const to = parent.find('.js-input-datepicker#date-end');
 			from.val(extensionRange.startDateText);
 			to.val(extensionRange.endDateText);
-			countDays = (end - start) / oneDay;
-			dayOrDays = countDays > 1 ? 'суток' : 'сутки';
-			selectorCountDays.text(`${countDays.toLocaleString('ru-RU')} ${dayOrDays}`);
-			multipleDays = countDays * formDataPrice;
-			desiredFormat(multipleDaysSelector, multipleDays);
-			total = multipleDays + servicetPrice1 + servicetPrice2 - discount;
-			desiredFormat(totalPrice, total);
+			if (parent.parent().hasClass('js-calc')) {
+				console.log('mkjkjospl;ls')
+				countDays = (end - start) / oneDay;
+				dayOrDays = countDays > 1 ? 'суток' : 'сутки';
+				selectorCountDays.text(`${countDays.toLocaleString('ru-RU')} ${dayOrDays}`);
+				multipleDays = countDays * formDataPrice;
+				desiredFormat(multipleDaysSelector, multipleDays);
+				total = multipleDays + servicetPrice1 + servicetPrice2 - discount;
+				desiredFormat(totalPrice, total);
+			}
 		} else {
 			const monthStart = monthName(extensionRange.startDate);
 			const monthEnd = monthName(extensionRange.endDate);
@@ -201,7 +242,7 @@ $(function() {
 			const dayEnd = extensionRange.endDate.getDate();
 			searchDate.val(`${dayStart} ${monthStart} - ${dayEnd} ${monthEnd}`);
 		}
-		calendar.hide();
+		thisCalendar.hide();
 	});
 
 	// Показ календаря
@@ -209,30 +250,35 @@ $(function() {
 		$(this).siblings('.js-input-datepicker').focus();
 	});
 
-	inputDatepicker.on('focus', () => {
-		calendar.show();
+	inputDatepicker.on('focus', function() {
+		calendar.hide();
+		const parent = $(this).parents('.js-calendar-parent');
+		parent.find(calendar).show();
 	});
 
 	$(document).on('click', e => {
 		const target = $(e.target);
 		// Закрытие календаря
 		if (!target.parents('.js-calendar-parent').length && !target.is('.ui-datepicker-prev') &&
-			!target.is('.ui-datepicker-next')
-		) {
+			!target.is('.ui-datepicker-next')) {
 			calendar.hide();
+			calendarBirthday.hide();
 		}
+
 		// Закрытие выпадающего списка
 		if (dropdown.hasClass(dropdownOpen)) {
-			if (!target.parents('.js-dropdown-form').length && !target.is(tglDrop)) {
-				dropdown.removeClass(dropdownOpen)
+			if (!target.parents('.js-dropdown-form').length) {
+				dropdown.removeClass(dropdownOpen);
 			}
 		}
 	});
 
 	// Открытие / закрытие выпадающего списка
 	tglDrop.on('click', function() {
-		dropdown.not($(this).parent(dropdown)).removeClass(dropdownOpen);
-		$(this).parent(dropdown).toggleClass(dropdownOpen);
+		const parent = $(this).parents('.js-dropdown-form');
+		const thisDrop = parent.find(dropdown);
+		dropdown.not(thisDrop).removeClass(dropdownOpen);
+		thisDrop.toggleClass(dropdownOpen);
 	});
 
 	// Увеличение значения "гостей"
@@ -328,7 +374,7 @@ $(function() {
 			parentForm.find(guestsSelector).text(defultText);
 			parentForm.attr('title', '');
 		}
-		$(this).parents('.js-dropdown-form').removeClass(dropdownOpen);
+		$(this).parents('.formfield__dropdown').removeClass(dropdownOpen);
 	});
 
 	// Сброс значений выпадающего списка
@@ -386,9 +432,15 @@ $(function() {
 
 	// Для телефона
 	$('.js-tel').each((id, input) => {
-		new Inputmask("8-(978)-999-99-99").mask(input);
+		new Inputmask('8-(978)-999-99-99').mask(input);
 	});
 
+	// Для даты
+	$('.js-mask').each((id, input) => {
+		new Inputmask('99.99.9999').mask(input);
+	});
+
+	// Цена с пробелами
 	$('.js-price').each(function() {
 		desiredFormat($(this), +$(this).text());
 	});

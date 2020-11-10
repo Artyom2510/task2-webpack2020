@@ -24,8 +24,9 @@ $(function() {
 			$('.js-max-val').text(Math.ceil(values[1]));
 		});
 
-		$('.js-tgl-slidedown').on('click', () => {
-			$('.js-body-slidedown').slideToggle(200);
+		$('.js-tgl-slidedown').on('click', function() {
+			const parent = $(this).parent();
+			parent.find('.js-body-slidedown').slideToggle(200);
 		});
 	}
 
